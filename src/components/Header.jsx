@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Hidden, InputBase, Tabs, Tab } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, Hidden, InputBase, Button } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Drawer, { drawerWidth } from './Drawer.jsx';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -37,22 +37,21 @@ const Header = () => {
                     <Typography className={classes.title} variant='subtitle1'>
                         jihyo-kim
                     </Typography>
-                    <Tabs
-                        value={tabSelected}
-                        onChange={onTabChanged}
-                        variant='standard'
-                        indicatorColor='primary'
-                    >
-                        {tabItems.map(item => (
-                            <Tab component='a' key={item} label={item} />
-                        ))}
-                    </Tabs>
+                    <Button disableRipple color='inherit' size='small' className={classes.headerButton}>
+                        Sign In
+                    </Button>
+                    <Button disableRipple color='inherit' size='small' className={classes.headerButton}>
+                        About
+                    </Button>
+                    <Button disableRipple color='inherit' size='small' className={classes.headerButton}>
+                        Create
+                    </Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
                         <InputBase
-                            placeholder="Search posts..."
+                            placeholder="Search"
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
@@ -88,10 +87,9 @@ const useStyles = makeStyles(theme => ({
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        // [theme.breakpoints.up('md')]: {
-        //     marginLeft: drawerWidth,
-        //     width: `calc(100% - ${drawerWidth}px)`,
-        // },
+    },
+    headerButton: {
+        textTransform: 'none',
     },
     title: {
         display: 'inline',
@@ -100,9 +98,9 @@ const useStyles = makeStyles(theme => ({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.black, 0.15),
+        backgroundColor: fade(theme.palette.common.black, 0.35),
         '&:hover': {
-            backgroundColor: fade(theme.palette.common.black, 0.25),
+            backgroundColor: fade(theme.palette.common.black, 0.45),
         },
         marginLeft: 'auto',
     },
