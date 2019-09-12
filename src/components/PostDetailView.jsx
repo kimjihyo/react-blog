@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Breadcrumbs, Link, Button, IconButton } from '@material-ui/core'
+import { Typography, Breadcrumbs, Link, Button, IconButton, Hidden } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
 import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import StarIcon from '@material-ui/icons/StarBorder';
 
 
 const PostDetailView = (props) => {
@@ -23,20 +24,26 @@ const PostDetailView = (props) => {
                         Accessories
                     </Link>
                     <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                        New Collection
+                        Data Engineering
                     </Link>
                 </Breadcrumbs>
                 <span className={classes.topUtilRowButtons}>
-                    <Button disableRipple className={classes.buttons}>
-                        <EditIcon className={classes.leftIcon} />
-                        Edit
-                    </Button>
-                    <Button disableRipple className={classes.buttons}>
-                        <ShareIcon className={classes.leftIcon}/>
-                        Share
-                    </Button>
+                    <Hidden smDown>
+                        <Button disableRipple className={classes.buttons}>
+                            <EditIcon className={classes.leftIcon} />
+                            Edit
+                        </Button>
+                        <Button disableRipple className={classes.buttons}>
+                            <StarIcon className={classes.leftIcon} />
+                            Save for later
+                        </Button>
+                        <Button disableRipple className={classes.buttons}>
+                            <ShareIcon className={classes.leftIcon}/>
+                            Share
+                        </Button>
+                    </Hidden>
                     <IconButton disableRipple className={classes.buttons}>
-                        <MoreVertIcon />
+                        <MoreHorizIcon />
                     </IconButton>
                 </span>
             </div>
@@ -74,9 +81,10 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1em',
     },
     topUtilRow: {
-        marginBottom: '1em',
+        marginBottom: '2em',
         display: 'flex',
         paddingLeft: '2em',
+        // borderBottom: '1px #dbdbdb solid',
     },
     breadcrumbs: {
         marginRight: 'auto',

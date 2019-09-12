@@ -45,5 +45,5 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const drawerWidth = 240;
+export const drawerWidth = 300;
 export default Drawer;
