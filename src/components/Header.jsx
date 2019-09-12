@@ -3,12 +3,20 @@ import { AppBar, Toolbar, Typography, IconButton, Hidden, InputBase, Button } fr
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Drawer, { drawerWidth } from './Drawer.jsx';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from '@material-ui/icons/Search';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-export const tabItems = ['Sign In', 'Create'];
 const Header = () => {
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const tabItems = ['Sign In', 'Create'];
+    const drawerItems = ['Archive', 'Label', 'Settings'];
+    const persistentTapItems = [
+        {
+            text: 'Spaces',
+            icon: (<ArrowDropDownIcon />)
+        }
+    ];
 
     const onTabChanged = (e, newValue) => {
         setValue(newValue);
@@ -36,6 +44,12 @@ const Header = () => {
                     <Typography className={classes.title} variant='subtitle1'>
                         jihyo-kim
                     </Typography>
+                    {persistentTapItems.map(item => (
+                        <Button key={item} disableRipple color='inherit' size='small' className={classes.headerButton}>
+                            {item.text}
+                            {item.icon}
+                        </Button>
+                    ))}
                     <Hidden xsDown>
                         {tabItems.map(item => (
                             <Button key={item} disableRipple color='inherit' size='small' className={classes.headerButton}>
@@ -62,6 +76,7 @@ const Header = () => {
                 <Drawer
                     isOpen={true}
                     variant='permanent'
+                    items={drawerItems}
                 />
             </Hidden>
             <Hidden mdUp>
@@ -69,6 +84,7 @@ const Header = () => {
                     isOpen={drawerOpen}
                     variant='temporary'
                     onClosed={onDrawerToggled}
+                    items={[...tabItems, 'Divider', ...drawerItems]}
                 />
             </Hidden>
         </div>

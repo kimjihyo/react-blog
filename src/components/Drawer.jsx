@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider } from '@material-ui/core';
-import { tabItems } from './Header.jsx';
 
 // Drawer Items
-const drawerItems = ['Archive', 'Lables'];
+// const drawerItems = ['Archive', 'Lables'];
 
 const Drawer = (props) => {
     const classes = useStyles();
@@ -18,19 +17,17 @@ const Drawer = (props) => {
                 variant={props.variant}
             >
                 <List>
-                    <Hidden smUp>
-                        {tabItems.map(item => (
-                            <ListItem button key={item}>
+                    {props.items.map(item => {
+                        if (item === 'Divider') {
+                            return <Divider key='divider' />
+                        }
+
+                        return ((
+                            <ListItem button key={item + '-drawer'}>
                                 <ListItemText primary={item} />
                             </ListItem>
-                        ))}
-                        <Divider />
-                    </Hidden>
-                    {drawerItems.map(item => (
-                        <ListItem button key={item}>
-                            <ListItemText primary={item} />
-                        </ListItem>
-                    ))}
+                        ));
+                    })}
                 </List>
             </MaterialDrawer>
         </div>
@@ -53,5 +50,5 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const drawerWidth = 260;
+export const drawerWidth = 320;
 export default Drawer;

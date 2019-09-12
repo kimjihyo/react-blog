@@ -12,12 +12,14 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import StarIcon from '@material-ui/icons/StarBorder';
 
+import CommentSection from './CommentSection.jsx';
+
 
 const PostDetailView = (props) => {
     const classes = useStyles();
     const anchorRef = React.useRef(null);
     const [moreDropDownOpen, setMoreDropDownOpen] = React.useState(false);
-    const moreDropDownContents = ['Page History', 'Page Information', 'Import Word Document', 'Copy', 'Move'];
+    const moreDropDownContents = ['Page History', 'Page Information', 'Import Word Document', 'Divider', 'Copy', 'Move'];
     const topUtilRowButtons = [
         { text: 'Edit', icon: (<EditIcon className={classes.leftIcon} />) },
         { text: 'Save for later', icon: (<StarIcon className={classes.leftIcon} />) },
@@ -82,7 +84,7 @@ const PostDetailView = (props) => {
                                     <Hidden mdUp>
                                         {topUtilRowButtons.map(item => (
                                             <MenuItem
-                                                key={item}
+                                                key={item.text + 'topUitlRowButtons-dropDown'}
                                                 disableRipple
                                             >
                                                 <Typography variant='body2'>
@@ -90,18 +92,23 @@ const PostDetailView = (props) => {
                                                 </Typography>
                                             </MenuItem>
                                         ))}
-                                    <Divider />
+                                        <Divider />
                                     </Hidden>
-                                    {moreDropDownContents.map(item => (
-                                        <MenuItem
-                                            key={item}
-                                            disableRipple
-                                        >
-                                            <Typography variant='body2'>
-                                                {item}
-                                            </Typography>
-                                        </MenuItem>
-                                    ))}
+                                    {moreDropDownContents.map(item => {
+                                        if (item === 'Divider') {
+                                            return <Divider key={'divider' + moreDropDownContents.indexOf(item)} />
+                                        }
+                                        return (
+                                            <MenuItem
+                                                key={item + 'moreDropDownContents'}
+                                                disableRipple
+                                            >
+                                                <Typography variant='body2'>
+                                                    {item}
+                                                </Typography>
+                                            </MenuItem>
+                                        )
+                                    })}
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>
@@ -118,9 +125,7 @@ const PostDetailView = (props) => {
                 <p className={classes.body}>
                     {props.post.body}
                 </p>
-                <div className={classes.commentArea}>
-
-                </div>
+                <CommentSection />
             </div>
         </div>
     );
@@ -138,7 +143,6 @@ const useStyles = makeStyles(theme => ({
         color: 'grey'
     },
     body: {
-        maxWidth: '55em',
         marginTop: '1em',
     },
     topUtilRow: {
@@ -169,6 +173,7 @@ const useStyles = makeStyles(theme => ({
     buttons: {
         textTransform: 'none',
         fontWeight: '400',
+        color: '#525252',
     },
     moreDropDown: {
         boxShadow: '1px 1px 2px #b8b8b8'
