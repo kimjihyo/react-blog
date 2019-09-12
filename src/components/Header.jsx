@@ -5,11 +5,10 @@ import Drawer, { drawerWidth } from './Drawer.jsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search'
 
+export const tabItems = ['Sign In', 'Create'];
 const Header = () => {
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [tabSelected, setTabSelected] = useState(0);
-    const tabItems = ['Home', 'Sign In', 'Create'];
 
     const onTabChanged = (e, newValue) => {
         setValue(newValue);
@@ -37,15 +36,13 @@ const Header = () => {
                     <Typography className={classes.title} variant='subtitle1'>
                         jihyo-kim
                     </Typography>
-                    <Button disableRipple color='inherit' size='small' className={classes.headerButton}>
-                        Sign In
-                    </Button>
-                    <Button disableRipple color='inherit' size='small' className={classes.headerButton}>
-                        About
-                    </Button>
-                    <Button disableRipple color='inherit' size='small' className={classes.headerButton}>
-                        Create
-                    </Button>
+                    <Hidden xsDown>
+                        {tabItems.map(item => (
+                            <Button key={item} disableRipple color='inherit' size='small' className={classes.headerButton}>
+                                {item}
+                            </Button>
+                        ))}
+                    </Hidden>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
@@ -90,6 +87,7 @@ const useStyles = makeStyles(theme => ({
     },
     headerButton: {
         textTransform: 'none',
+        fontWeight: '400',
     },
     title: {
         display: 'inline',

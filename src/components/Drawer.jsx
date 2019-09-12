@@ -1,25 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
+import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider } from '@material-ui/core';
+import { tabItems } from './Header.jsx';
 
 // Drawer Items
-const ARCHIVE = 'Archive';
-const LABLES = 'Lables';
-const SIGN_IN = 'Sign In';
-const drawerItems = [ARCHIVE, LABLES, SIGN_IN];
+const drawerItems = ['Archive', 'Lables'];
 
 const Drawer = (props) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <MaterialDrawer 
+            <MaterialDrawer
                 open={props.isOpen}
                 onClose={props.onClosed}
-                classes={{paper: classes.drawer}}
+                classes={{ paper: classes.drawer }}
                 variant={props.variant}
             >
                 <List>
+                    <Hidden smUp>
+                        {tabItems.map(item => (
+                            <ListItem button key={item}>
+                                <ListItemText primary={item} />
+                            </ListItem>
+                        ))}
+                        <Divider />
+                    </Hidden>
                     {drawerItems.map(item => (
                         <ListItem button key={item}>
                             <ListItemText primary={item} />
@@ -41,9 +47,11 @@ const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
         backgroundColor: 'whitesmoke',
-        paddingTop: '3em',
+        [theme.breakpoints.up('md')]: {
+            paddingTop: '3em',
+        }
     }
 }));
 
-export const drawerWidth = 300;
+export const drawerWidth = 260;
 export default Drawer;
