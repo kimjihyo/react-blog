@@ -19,7 +19,6 @@ const RichTextEditor = () => {
     }
     const onClick = (e) => {
         editorRef.current.focus();
-        
     }
     return (
         <Paper className={classes.richTextEditor}>
@@ -38,6 +37,10 @@ const RichTextEditor = () => {
                     placeholder={'Please tell a story'}
                 />
             </div>
+            <div className='bottomRow'>
+                <TextFieldButtons />
+
+            </div>
         </Paper>
     );
 }
@@ -50,10 +53,18 @@ const blockStyleControllers = [
 
 const BlockStyleController = () => {
     const classes = useStylesForBlockStyleController();
+    const [activeController, setActiveController] = React.useState(null);
+    const onToggle = (text) => {
+        if (text != activeController) {
+            setActiveController(text);
+        } else {
+            setActiveController(null);
+        }
+    }
     return (
         <div className={classes.blockStyleController}>
             {blockStyleControllers.map(item => (
-                <StyleButton key={item} text={item} clicked={false} onToggle={(text) => { console.log(text) }} />
+                <StyleButton key={item} text={item} clicked={item === activeController} onToggle={onToggle} />
             ))}
         </div>
     );
@@ -65,21 +76,51 @@ const inlineStyleControllers = [
 
 const InlineStyleController = () => {
     const classes = useStylesForInlineStyleController();
+    const [activeController, setActiveController] = React.useState(null);
+    const onToggle = (text) => {
+        if (text != activeController) {
+            setActiveController(text);
+        } else {
+            setActiveController(null);
+        }
+    }
     return (
         <div className={classes.blockStyleController}>
             {inlineStyleControllers.map(item => (
-                <StyleButton key={item} text={item} clicked={false} onToggle={(text) => { console.log(text) }} />
+                <StyleButton key={item} text={item} clicked={item === activeController} onToggle={onToggle} />
             ))}
         </div>
     );
 }
 
+const textFieldButtons = [
+    'Cancel',
+    'Save',
+    'Preview',
+]
+
+const TextFieldButtons = () => {
+    const classes = useStylesForTextFieldButtons();
+    return (
+        <div className={classes.buttonRows}>
+            {textFieldButtons.map(item => (
+                <button
+                    key={item}
+                    className={classes.button}
+                >
+                    {item}
+                </button>
+            ))}
+        </div>
+    )
+}
+
 const useStylesForRichTextEditor = makeStyles(theme => ({
     richTextEditor: {
+        width: '100%',
         outline: '1px solid #e3e3e3',
         padding: '1em 0.5em',
         marginTop: '10px',
-        width: '30em',
     },
     divider: {
         marginTop: '0.5em',
@@ -89,7 +130,12 @@ const useStylesForRichTextEditor = makeStyles(theme => ({
         padding: '10px',
         color: '#525252',
         cursor: 'text',
+        minHeight: '5em',
     },
+    bottomRow: {
+        display: 'inline-block',
+        marginLeft: 'auto',
+    }
 }));
 
 const useStylesForBlockStyleController = makeStyles(theme => ({
@@ -101,6 +147,17 @@ const useStylesForBlockStyleController = makeStyles(theme => ({
 const useStylesForInlineStyleController = makeStyles(theme => ({
     inlineStyleControllers: {
         display: 'flex',
+    }
+}));
+
+const useStylesForTextFieldButtons = makeStyles(theme => ({
+    buttonRows: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    button: {
+        border: 'none',
+        padding: '8px',
     }
 }));
 
