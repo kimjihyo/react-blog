@@ -12,7 +12,7 @@ const StyleButton = (props) => {
             className={classes.styleButton}
             onClick={onToggle}
             style={{
-                color: props.clicked ? 'tomato' : 'grey'
+                color: props.clicked ? '#3F51B5' : 'grey'
             }}
         >
             {props.text}

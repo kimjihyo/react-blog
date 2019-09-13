@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Divider, Paper } from '@material-ui/core';
+import { Divider, Paper, Button } from '@material-ui/core';
 import StyleButton from './StyleButton.jsx';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
@@ -104,12 +104,15 @@ const TextFieldButtons = () => {
     return (
         <div className={classes.buttonRows}>
             {textFieldButtons.map(item => (
-                <button
+                <Button
                     key={item}
                     className={classes.button}
+                    color={item === 'Save' ? 'primary' : 'inherit'}
+                    size='small'
+                    disableRipple
                 >
                     {item}
-                </button>
+                </Button>
             ))}
         </div>
     )
@@ -156,9 +159,8 @@ const useStylesForTextFieldButtons = makeStyles(theme => ({
         justifyContent: 'flex-end',
     },
     button: {
-        border: 'none',
-        padding: '8px',
-    }
+        fontSize: '12px',
+    },
 }));
 
 export default RichTextEditor;
