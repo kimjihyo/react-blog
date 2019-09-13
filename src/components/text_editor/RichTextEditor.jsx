@@ -5,6 +5,7 @@ import StyleButton from './StyleButton.jsx';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
 const RichTextEditor = () => {
+    const editorRef = React.createRef();
     const classes = useStylesForRichTextEditor();
     const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
     const onChange = (editorState) => setEditorState(editorState);
@@ -16,17 +17,25 @@ const RichTextEditor = () => {
         }
         return 'not-handled';
     }
+    const onClick = (e) => {
+        editorRef.current.focus();
+        
+    }
     return (
         <Paper className={classes.richTextEditor}>
             <BlockStyleController />
             <InlineStyleController />
             <Divider className={classes.divider} />
-            <div className={classes.editorTextField}>
-                <Editor 
+            <div
+                className={classes.editorTextField}
+                onClick={onClick}
+            >
+                <Editor
+                    ref={editorRef}
                     editorState={editorState}
                     handleKeyCommand={handleKeyCommand}
                     onChange={onChange}
-                    placeholder='Please tell us a story'
+                    placeholder={'Please tell a story'}
                 />
             </div>
         </Paper>
@@ -44,7 +53,7 @@ const BlockStyleController = () => {
     return (
         <div className={classes.blockStyleController}>
             {blockStyleControllers.map(item => (
-                <StyleButton text={item} clicked={false} onToggle={(text) => { console.log(text) }} />
+                <StyleButton key={item} text={item} clicked={false} onToggle={(text) => { console.log(text) }} />
             ))}
         </div>
     );
@@ -59,7 +68,7 @@ const InlineStyleController = () => {
     return (
         <div className={classes.blockStyleController}>
             {inlineStyleControllers.map(item => (
-                <StyleButton text={item} clicked={false} onToggle={(text) => { console.log(text) }} />
+                <StyleButton key={item} text={item} clicked={false} onToggle={(text) => { console.log(text) }} />
             ))}
         </div>
     );
@@ -70,7 +79,7 @@ const useStylesForRichTextEditor = makeStyles(theme => ({
         outline: '1px solid #e3e3e3',
         padding: '1em 0.5em',
         marginTop: '10px',
-        cursor: 'text',
+        width: '30em',
     },
     divider: {
         marginTop: '0.5em',
@@ -79,8 +88,8 @@ const useStylesForRichTextEditor = makeStyles(theme => ({
         fontSize: '14px',
         padding: '10px',
         color: '#525252',
-
-    }
+        cursor: 'text',
+    },
 }));
 
 const useStylesForBlockStyleController = makeStyles(theme => ({

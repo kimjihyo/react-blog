@@ -7,3 +7,8 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 2.0;
 }
+
+.public-DraftEditorPlaceholder-root {
+    position: absolute;
+    color: grey;
+}

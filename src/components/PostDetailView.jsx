@@ -149,6 +149,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '0.5em',
         display: 'flex',
         paddingLeft: '2em',
+        paddingRight: '1em',
     },
     breadcrumbs: {
         lineHeight: '3',
