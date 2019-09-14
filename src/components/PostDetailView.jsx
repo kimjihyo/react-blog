@@ -61,7 +61,7 @@ const PostDetailView = (props) => {
                     <Hidden smDown>
                         {topUtilRowButtons.map(item => (
                             <Button
-                                key={'topUtilRowButtons-' + item}
+                                key={'topUtilRowButtons-' + item.text}
                                 disableRipple
                                 className={classes.buttons}
                             >
@@ -123,7 +123,7 @@ const PostDetailView = (props) => {
                     Created by {props.post.author} on {props.post.date}
                 </Typography>
                 <p className={classes.body}>
-                    {/* {props.post.body} */}
+                    {props.post.body}
                 </p>
                 <CommentSection />
             </div>

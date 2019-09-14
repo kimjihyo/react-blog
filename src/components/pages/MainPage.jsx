@@ -9,7 +9,7 @@ import SafeArea from '../SafeArea.jsx';
 
 const samplePost = {
     id: 0,
-    title: 'Segment Mobile App Cutover',
+    title: 'Sample post',
     date: 'Friday, January 26, 2018',
     author: 'Jihyo Kim',
     summary: 'helllllo world!!',

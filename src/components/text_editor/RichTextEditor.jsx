@@ -2,13 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Paper, Button } from '@material-ui/core';
 import StyleButton from './StyleButton.jsx';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { Editor, EditorState, RichUtils, ContentState } from 'draft-js';
+import './TextEditor.css';
 
-const RichTextEditor = () => {
+const RichTextEditor = (props) => {
     const editorRef = React.createRef();
     const classes = useStylesForRichTextEditor();
     const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
+
     const onChange = (editorState) => setEditorState(editorState);
+
     const handleKeyCommand = (command, editorState) => {
         const newState = RichUtils.handleKeyCommand(editorState, command);
         if (newState) {
@@ -17,13 +20,52 @@ const RichTextEditor = () => {
         }
         return 'not-handled';
     }
+
     const onClick = (e) => {
         editorRef.current.focus();
     }
+
+    const onCancel = (e) => {
+        const newEditorState = EditorState.push(editorState, ContentState.createFromText(''));
+        setEditorState(newEditorState);
+    }
+
+    const toggleBlockType = (blockType) => {
+        onChange(
+            RichUtils.toggleBlockType(
+                editorState,
+                blockType
+            )
+        );
+    }
+
+    const toggleInlineStyle = (inlineStyle) => {
+        onChange(
+            RichUtils.toggleInlineStyle(
+                editorState,
+                inlineStyle
+            )
+        );
+    }
+
+    const getBlockStyle = (block) => {
+        switch (block.getType()) {
+            case 'blockquote':
+                return 'RichEditor-blockquote';
+            default: return null;
+        }
+    }
+
     return (
         <Paper className={classes.richTextEditor}>
-            <BlockStyleController />
-            <InlineStyleController />
+            <BlockStyleController
+                editorState={editorState}
+                onToggle={toggleBlockType}
+            />
+            <InlineStyleController
+                editorState={editorState}
+                onToggle={toggleInlineStyle}
+            />
             <Divider className={classes.divider} />
             <div
                 className={classes.editorTextField}
@@ -31,63 +73,77 @@ const RichTextEditor = () => {
             >
                 <Editor
                     ref={editorRef}
+                    blockStyleFn={getBlockStyle}
                     editorState={editorState}
                     handleKeyCommand={handleKeyCommand}
                     onChange={onChange}
-                    placeholder={'Please tell a story'}
+                    placeholder={props.placeholder}
                 />
             </div>
             <div className='bottomRow'>
-                <TextFieldButtons />
-
+                <TextFieldButtons
+                    onCancel={onCancel}
+                />
             </div>
         </Paper>
     );
 }
 
-const blockStyleControllers = [
-    'H1', 'H2', 'H3', 'H4',
-    'H5', 'H6', 'Blockquote', 'UL',
-    'OL', 'Code block'
+const BLOCK_TYPES = [
+    { label: 'H1', style: 'header-one' },
+    { label: 'H2', style: 'header-two' },
+    { label: 'H3', style: 'header-three' },
+    { label: 'H4', style: 'header-four' },
+    { label: 'H5', style: 'header-five' },
+    { label: 'H6', style: 'header-six' },
+    { label: 'Blockquote', style: 'blockquote' },
+    { label: 'UL', style: 'unordered-list-item' },
+    { label: 'OL', style: 'ordered-list-item' },
+    { label: 'Code Block', style: 'code-block' },
 ];
 
-const BlockStyleController = () => {
+const BlockStyleController = (props) => {
     const classes = useStylesForBlockStyleController();
-    const [activeController, setActiveController] = React.useState(null);
-    const onToggle = (text) => {
-        if (text != activeController) {
-            setActiveController(text);
-        } else {
-            setActiveController(null);
-        }
-    }
+    const selection = props.editorState.getSelection();
+    const blockType = props.editorState
+        .getCurrentContent()
+        .getBlockForKey(selection.getStartKey())
+        .getType();
+
     return (
         <div className={classes.blockStyleController}>
-            {blockStyleControllers.map(item => (
-                <StyleButton key={item} text={item} clicked={item === activeController} onToggle={onToggle} />
+            {BLOCK_TYPES.map(item => (
+                <StyleButton
+                    key={item.label}
+                    label={item.label}
+                    style={item.style}
+                    active={item.style === blockType}
+                    onToggle={() => props.onToggle(item.style)}
+                />
             ))}
         </div>
     );
 }
 
-const inlineStyleControllers = [
-    'Bold', 'Italic', 'Underline', 'Monospace'
-]
+const INLINE_STYLES = [
+    { label: 'Bold', style: 'BOLD' },
+    { label: 'Italic', style: 'ITALIC' },
+    { label: 'Underline', style: 'UNDERLINE' },
+    { label: 'Monospace', style: 'CODE' },
+];
 
-const InlineStyleController = () => {
+const InlineStyleController = (props) => {
     const classes = useStylesForInlineStyleController();
-    const [activeController, setActiveController] = React.useState(null);
-    const onToggle = (text) => {
-        if (text != activeController) {
-            setActiveController(text);
-        } else {
-            setActiveController(null);
-        }
-    }
+    const currentStyle = props.editorState.getCurrentInlineStyle();
     return (
         <div className={classes.blockStyleController}>
-            {inlineStyleControllers.map(item => (
-                <StyleButton key={item} text={item} clicked={item === activeController} onToggle={onToggle} />
+            {INLINE_STYLES.map(item => (
+                <StyleButton
+                    key={item.label}
+                    label={item.label}
+                    style={item.style}
+                    active={currentStyle.has(item.style)}
+                    onToggle={() => props.onToggle(item.style)} />
             ))}
         </div>
     );
@@ -99,14 +155,22 @@ const textFieldButtons = [
     'Preview',
 ]
 
-const TextFieldButtons = () => {
+const TextFieldButtons = (props) => {
     const classes = useStylesForTextFieldButtons();
+    const onClick = (item) => {
+        if (item === 'Save') {
+
+        } else if (item == 'Cancel') {
+            props.onCancel();
+        }
+    }
     return (
         <div className={classes.buttonRows}>
             {textFieldButtons.map(item => (
                 <Button
                     key={item}
                     className={classes.button}
+                    onClick={(e) => onClick(item)}
                     color={item === 'Save' ? 'primary' : 'inherit'}
                     size='small'
                     disableRipple

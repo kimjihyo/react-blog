@@ -4,18 +4,19 @@ import { makeStyles } from '@material-ui/core/styles';
 const StyleButton = (props) => {
     const classes = useStyles();
     const onToggle = (e) => {
-        props.onToggle(props.text);
+        e.preventDefault();
+        props.onToggle(props.style);
     }
 
     return (
         <span 
-            className={classes.styleButton}
-            onClick={onToggle}
+            className={`${classes.styleButton} disableSelection`}
+            onMouseDown={onToggle}
             style={{
-                color: props.clicked ? '#3F51B5' : 'grey'
+                color: props.active ? '#3F51B5' : 'grey'
             }}
         >
-            {props.text}
+            {props.label}
         </span>
     );
 }
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: '14px',
         '&:hover': {
             cursor: 'pointer',
-        }
+        },
     }
 }));
 
