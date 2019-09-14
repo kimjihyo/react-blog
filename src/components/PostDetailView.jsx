@@ -12,14 +12,44 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import StarIcon from '@material-ui/icons/StarBorder';
 
-import CommentSection from './CommentSection.jsx';
+import CommentSection from './comment/CommentSection.jsx';
 
 
 const PostDetailView = (props) => {
     const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            <TopUtilRow />
+            <div className={classes.content}>
+                <Typography variant='h5'>
+                    {props.post.title}
+                </Typography>
+                <Typography variant='caption' className={classes.date}>
+                    Created by {props.post.author} on {props.post.date}
+                </Typography>
+                <p className={classes.body}>
+                    {props.post.body}
+                </p>
+                <CommentSection />
+            </div>
+        </div>
+    );
+}
+
+const TopUtilRow = () => {
+    const classes = useStyles();
     const anchorRef = React.useRef(null);
     const [moreDropDownOpen, setMoreDropDownOpen] = React.useState(false);
-    const moreDropDownContents = ['Page History', 'Page Information', 'Import Word Document', 'Divider', 'Copy', 'Move'];
+
+    const moreDropDownContents = [
+        'Page History', 
+        'Page Information', 
+        'Import Word Document', 
+        'Divider', 
+        'Copy', 
+        'Move',
+    ];
     const topUtilRowButtons = [
         { text: 'Edit', icon: (<EditIcon className={classes.leftIcon} />) },
         { text: 'Save for later', icon: (<StarIcon className={classes.leftIcon} />) },
@@ -39,94 +69,78 @@ const PostDetailView = (props) => {
     }
 
     return (
-        <div className={classes.root}>
-            <div className={classes.topUtilRow}>
-                <Breadcrumbs maxItems={3} aria-label='breadcrumb' className={classes.breadcrumbs}>
-                    <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                        Home
-                    </Link>
-                    <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                        Catalog
-                    </Link>
-                    <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                        Accessories
-                    </Link>
-                    <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                        Data Engineering
-                    </Link>
-                </Breadcrumbs>
-                <Typography className={classes.viewCol}>
-                </Typography>
-                <span className={classes.topUtilRowButtons}>
-                    <Hidden smDown>
-                        {topUtilRowButtons.map(item => (
-                            <Button
-                                key={'topUtilRowButtons-' + item.text}
-                                disableRipple
-                                className={classes.buttons}
-                            >
-                                {item.icon}
-                                {item.text}
-                            </Button>
-                        ))}
-                    </Hidden>
-                    <IconButton
-                        ref={anchorRef}
-                        onClick={onMoreButtonClicked}
-                        disableRipple
-                        className={classes.buttons}>
-                        <MoreHorizIcon />
-                    </IconButton>
-                    <Popper open={moreDropDownOpen} anchorEl={anchorRef.current} transition>
-                        <Paper>
-                            <ClickAwayListener onClickAway={onMoreDropDownClosed}>
-                                <MenuList className={classes.moreDropDown}>
-                                    <Hidden mdUp>
-                                        {topUtilRowButtons.map(item => (
-                                            <MenuItem
-                                                key={item.text + 'topUitlRowButtons-dropDown'}
-                                                disableRipple
-                                            >
-                                                <Typography variant='body2'>
-                                                    {item.text}
-                                                </Typography>
-                                            </MenuItem>
-                                        ))}
-                                        <Divider />
-                                    </Hidden>
-                                    {moreDropDownContents.map(item => {
-                                        if (item === 'Divider') {
-                                            return <Divider key={'divider' + moreDropDownContents.indexOf(item)} />
-                                        }
-                                        return (
-                                            <MenuItem
-                                                key={item + 'moreDropDownContents'}
-                                                disableRipple
-                                            >
-                                                <Typography variant='body2'>
-                                                    {item}
-                                                </Typography>
-                                            </MenuItem>
-                                        )
-                                    })}
-                                </MenuList>
-                            </ClickAwayListener>
-                        </Paper>
-                    </Popper>
-                </span>
-            </div>
-            <div className={classes.content}>
-                <Typography variant='h5'>
-                    {props.post.title}
-                </Typography>
-                <Typography variant='caption' className={classes.date}>
-                    Created by {props.post.author} on {props.post.date}
-                </Typography>
-                <p className={classes.body}>
-                    {props.post.body}
-                </p>
-                <CommentSection />
-            </div>
+        <div className={classes.topUtilRow}>
+            <Breadcrumbs maxItems={3} aria-label='breadcrumb' className={classes.breadcrumbs}>
+                <Link color="primary" href="#" onClick={onNavLinkClicked}>
+                    Home
+            </Link>
+                <Link color="primary" href="#" onClick={onNavLinkClicked}>
+                    Catalog
+            </Link>
+                <Link color="primary" href="#" onClick={onNavLinkClicked}>
+                    Accessories
+            </Link>
+                <Link color="primary" href="#" onClick={onNavLinkClicked}>
+                    Data Engineering
+            </Link>
+            </Breadcrumbs>
+            <span className={classes.topUtilRowButtons}>
+                <Hidden smDown>
+                    {topUtilRowButtons.map(item => (
+                        <Button
+                            key={'topUtilRowButtons-' + item.text}
+                            disableRipple
+                            className={classes.buttons}
+                        >
+                            {item.icon}
+                            {item.text}
+                        </Button>
+                    ))}
+                </Hidden>
+                <IconButton
+                    ref={anchorRef}
+                    onClick={onMoreButtonClicked}
+                    disableRipple
+                    className={classes.buttons}>
+                    <MoreHorizIcon />
+                </IconButton>
+                <Popper open={moreDropDownOpen} anchorEl={anchorRef.current} transition>
+                    <Paper>
+                        <ClickAwayListener onClickAway={onMoreDropDownClosed}>
+                            <MenuList className={classes.moreDropDown}>
+                                <Hidden mdUp>
+                                    {topUtilRowButtons.map(item => (
+                                        <MenuItem
+                                            key={'topUitlRowButtons-DropDown-' + item.text}
+                                            disableRipple
+                                        >
+                                            <Typography variant='body2'>
+                                                {item.text}
+                                            </Typography>
+                                        </MenuItem>
+                                    ))}
+                                    <Divider />
+                                </Hidden>
+                                {moreDropDownContents.map(item => {
+                                    if (item === 'Divider') {
+                                        return <Divider key={'divider-' + moreDropDownContents.indexOf(item)} />
+                                    }
+                                    return (
+                                        <MenuItem
+                                            key={'moreDropDownContents-' + item}
+                                            disableRipple
+                                        >
+                                            <Typography variant='body2'>
+                                                {item}
+                                            </Typography>
+                                        </MenuItem>
+                                    )
+                                })}
+                            </MenuList>
+                        </ClickAwayListener>
+                    </Paper>
+                </Popper>
+            </span>
         </div>
     );
 }
@@ -137,13 +151,13 @@ const onNavLinkClicked = () => {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginRight: 'auto',
     },
     date: {
         color: 'grey'
     },
     body: {
         marginTop: '1em',
+        marginBottom: '3em',
     },
     topUtilRow: {
         marginBottom: '0.5em',
