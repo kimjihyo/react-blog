@@ -5,6 +5,7 @@ import PostMiniCard from '../PostMiniCard.jsx';
 import PostDetailView from '../PostDetailView.jsx';
 import Footer from '../Footer.jsx';
 import SafeArea from '../SafeArea.jsx';
+import NewPost from '../NewPost.jsx';
 
 
 const samplePost = {
@@ -22,6 +23,7 @@ const MainPage = () => {
             <Header />
             <SafeArea>
                 <PostDetailView post={samplePost}/>
+                {/* <NewPost /> */}
                 <Footer />
             </SafeArea>
         </div>

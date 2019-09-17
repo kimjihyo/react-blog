@@ -22,15 +22,23 @@ const PostDetailView = (props) => {
         <div className={classes.root}>
             <TopUtilRow />
             <div className={classes.content}>
-                <Typography variant='h5'>
+                <Typography 
+                    variant='h5'
+                >
                     {props.post.title}
                 </Typography>
-                <Typography variant='caption' className={classes.date}>
+                <Typography 
+                    variant='caption' 
+                    className={classes.date}
+                >
                     Created by {props.post.author} on {props.post.date}
                 </Typography>
-                <p className={classes.body}>
+                <Typography
+                    className={classes.body}
+                    variant='body2'
+                >
                     {props.post.body}
-                </p>
+                </Typography>
                 <CommentSection />
             </div>
         </div>
@@ -43,13 +51,14 @@ const TopUtilRow = () => {
     const [moreDropDownOpen, setMoreDropDownOpen] = React.useState(false);
 
     const moreDropDownContents = [
-        'Page History', 
-        'Page Information', 
-        'Import Word Document', 
-        'Divider', 
-        'Copy', 
+        'Page History',
+        'Page Information',
+        'Import Word Document',
+        'Divider',
+        'Copy',
         'Move',
     ];
+    
     const topUtilRowButtons = [
         { text: 'Edit', icon: (<EditIcon className={classes.leftIcon} />) },
         { text: 'Save for later', icon: (<StarIcon className={classes.leftIcon} />) },
@@ -158,6 +167,7 @@ const useStyles = makeStyles(theme => ({
     body: {
         marginTop: '1em',
         marginBottom: '3em',
+        lineHeight: 2,
     },
     topUtilRow: {
         marginBottom: '0.5em',

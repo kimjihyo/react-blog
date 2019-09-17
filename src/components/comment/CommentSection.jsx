@@ -23,6 +23,12 @@ const sampleComments = [
         date: 'March 25, 2015',
         body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, q',
     },
+    {
+        id: 4,
+        author: 'Malboro Gold',
+        date: 'March 25, 2015',
+        body: 'Old town road, Malboro Gold, and love',
+    },
 ]
 
 const CommentSection = () => {

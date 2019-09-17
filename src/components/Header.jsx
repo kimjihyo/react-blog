@@ -10,7 +10,7 @@ const Header = () => {
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const tabItems = ['Sign In', 'Create'];
-    const drawerItems = ['Archive', 'Label', 'Settings'];
+    const drawerItems = [];
     const persistentTapItems = [
         {
             text: 'Spaces',
