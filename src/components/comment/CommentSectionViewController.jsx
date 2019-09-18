@@ -34,6 +34,7 @@ class CommentSectionViewController extends React.Component {
         super(props);
     }
 
+
     onCancel() {
         console.log('Cancel');
     }
@@ -48,7 +49,7 @@ class CommentSectionViewController extends React.Component {
     }
 
     getPlaceHolder() {
-        return 'Leave a comment right here';
+        return 'Please write a comment here...';
     }
 
     getNumberOfComments() {

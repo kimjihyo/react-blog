@@ -12,6 +12,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import StarIcon from '@material-ui/icons/StarBorder';
 
+import RichTextEditorDisplayer from '../text_editor/RichTextEditorDisplayer.jsx';
 import CommentSectionViewController from '../comment/CommentSectionViewController.jsx';
 
 const PostDetailView = (props) => {
@@ -37,12 +38,13 @@ const PostDetailView = (props) => {
                 >
                     Created by {props.post.author} on {props.post.date}
                 </Typography>
-                <Typography
+                <div
                     className={classes.body}
-                    variant='body2'
                 >
-                    {props.post.body}
-                </Typography>
+                    <RichTextEditorDisplayer
+                        content={props.post.body}
+                    />
+                </div>
                 <CommentSectionViewController />
             </div>
         </div>
@@ -62,13 +64,13 @@ const TopUtilRow = (props) => {
         'Copy',
         'Move',
     ];
-    
+
     const topUtilRowButtons = [
         { text: 'Edit', icon: (<EditIcon className={classes.leftIcon} />) },
         { text: 'Save for later', icon: (<StarIcon className={classes.leftIcon} />) },
         { text: 'Share', icon: (<ShareIcon className={classes.leftIcon} />) }
     ];
-    
+
 
     const onMoreButtonClicked = (e) => {
         setMoreDropDownOpen(prevOpen => !prevOpen);
@@ -86,10 +88,10 @@ const TopUtilRow = (props) => {
         <div className={classes.topUtilRow}>
             <Breadcrumbs maxItems={3} aria-label='breadcrumb' className={classes.breadcrumbs}>
                 {props.paths.map(path => (
-                    <Link 
+                    <Link
                         key={'link' + path}
                         color="primary"
-                        href="#" 
+                        href="#"
                         onClick={() => props.onNavLinkClicked(path)}
                     >
                         {path}
@@ -170,6 +172,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1em',
         marginBottom: '3em',
         lineHeight: 2,
+        fontSize: '14px',
     },
     topUtilRow: {
         marginBottom: '0.5em',
