@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Hidden, InputBase, Button } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Drawer, { drawerWidth } from './Drawer.jsx';
+import Drawer, { drawerWidth } from '../Drawer.jsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-const Header = () => {
+const HeaderView = (props) => {
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
+    var searchValue = '';
     const tabItems = ['Sign In', 'Create'];
     const drawerItems = [];
     const persistentTapItems = [
@@ -17,10 +18,6 @@ const Header = () => {
             icon: (<ArrowDropDownIcon />)
         }
     ];
-
-    const onTabChanged = (e, newValue) => {
-        setValue(newValue);
-    }
 
     const onDrawerToggled = () => {
         setDrawerOpen(!drawerOpen);
@@ -45,14 +42,28 @@ const Header = () => {
                         jihyo-kim
                     </Typography>
                     {persistentTapItems.map(item => (
-                        <Button key={item} disableRipple color='inherit' size='small' className={classes.headerButton}>
+                        <Button
+                            key={item}
+                            disableRipple
+                            color='inherit'
+                            size='small'
+                            onClick={() => {}}
+                            className={classes.headerButton}
+                        >
                             {item.text}
                             {item.icon}
                         </Button>
                     ))}
-                    <Hidden xsDown>
+                    <Hidden smDown>
                         {tabItems.map(item => (
-                            <Button key={item} disableRipple color='inherit' size='small' className={classes.headerButton}>
+                            <Button
+                                key={item} 
+                                disableRipple 
+                                color='inherit' 
+                                size='small'
+                                onClick={() => props.onTabItemClicked(item)}
+                                className={classes.headerButton}
+                            >
                                 {item}
                             </Button>
                         ))}
@@ -66,6 +77,15 @@ const Header = () => {
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
+                            }}
+                            onChange={(e) => {
+                                searchValue = e.target.value;
+                            }}
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    props.onEnterPressed(searchValue);
+                                }
                             }}
                             inputProps={{ 'aria-label': 'search' }}
                         />
@@ -143,4 +163,4 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default Header;
+export default HeaderView;

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Paper, Button } from '@material-ui/core';
 import StyleButton from './StyleButton.jsx';
-import { Editor, EditorState, RichUtils, ContentState } from 'draft-js';
+import { Editor, EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
 import './TextEditor.css';
 
 const RichTextEditor = (props) => {
@@ -25,7 +25,7 @@ const RichTextEditor = (props) => {
         editorRef.current.focus();
     }
 
-    const onCancel = (e) => {
+    const clearContents = () => {
         const newEditorState = EditorState.push(editorState, ContentState.createFromText(''));
         setEditorState(newEditorState);
     }
@@ -56,16 +56,33 @@ const RichTextEditor = (props) => {
         }
     }
 
-    return (
-        <Paper className={classes.richTextEditor}>
-            <BlockStyleController
-                editorState={editorState}
-                onToggle={toggleBlockType}
-            />
+    const getStyleController = (isBlockStyleEnabled) => {
+        if (isBlockStyleEnabled) {
+            return (
+                <React.Fragment>
+                    <BlockStyleController
+                        editorState={editorState}
+                        onToggle={toggleBlockType}
+                    />
+                    <InlineStyleController
+                        editorState={editorState}
+                        onToggle={toggleInlineStyle}
+                    />
+                </React.Fragment>
+            );
+        }
+
+        return (
             <InlineStyleController
                 editorState={editorState}
                 onToggle={toggleInlineStyle}
             />
+        );
+    }
+
+    return (
+        <Paper className={classes.richTextEditor}>
+            {getStyleController(props.isBlockStyleEnabled)}
             <Divider className={classes.divider} />
             <div
                 className={classes.editorTextField}
@@ -82,7 +99,22 @@ const RichTextEditor = (props) => {
             </div>
             <div className='bottomRow'>
                 <TextFieldButtons
-                    onCancel={onCancel}
+                    onClick={(buttonType) => {
+                        switch (buttonType) {
+                            case 'Save':
+                                props.onSave(convertToRaw(editorState.getCurrentContent()));
+                                break;
+                            case 'Cancel':
+                                clearContents();
+                                props.onCancel();
+                                break;
+                            case 'Preview':
+                                props.onPreviewClicked();
+                                break;
+                            default:
+                                console.log('error on text editor event handler');
+                        }
+                    }}
                 />
             </div>
         </Paper>
@@ -136,7 +168,7 @@ const InlineStyleController = (props) => {
     const classes = useStylesForInlineStyleController();
     const currentStyle = props.editorState.getCurrentInlineStyle();
     return (
-        <div className={classes.blockStyleController}>
+        <div className={classes.inlineStyleControllers}>
             {INLINE_STYLES.map(item => (
                 <StyleButton
                     key={item.label}
@@ -157,20 +189,13 @@ const textFieldButtons = [
 
 const TextFieldButtons = (props) => {
     const classes = useStylesForTextFieldButtons();
-    const onClick = (item) => {
-        if (item === 'Save') {
-
-        } else if (item == 'Cancel') {
-            props.onCancel();
-        }
-    }
     return (
         <div className={classes.buttonRows}>
             {textFieldButtons.map(item => (
                 <Button
                     key={item}
                     className={classes.button}
-                    onClick={(e) => onClick(item)}
+                    onClick={(e) => props.onClick(item)}
                     color={item === 'Save' ? 'primary' : 'inherit'}
                     size='small'
                     disableRipple
@@ -208,12 +233,14 @@ const useStylesForRichTextEditor = makeStyles(theme => ({
 const useStylesForBlockStyleController = makeStyles(theme => ({
     blockStyleController: {
         display: 'flex',
+        marginBottom: '0.5em',
     }
 }));
 
 const useStylesForInlineStyleController = makeStyles(theme => ({
     inlineStyleControllers: {
         display: 'flex',
+        marginBottom: '1em',
     }
 }));
 

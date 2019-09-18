@@ -1,11 +1,8 @@
 import React from 'react';
-import Header from '../Header.jsx';
-import Posts from '../Posts.jsx';
-import PostMiniCard from '../PostMiniCard.jsx';
-import PostDetailView from '../PostDetailView.jsx';
 import Footer from '../Footer.jsx';
 import SafeArea from '../SafeArea.jsx';
-import NewPost from '../NewPost.jsx';
+import PostdetailViewController from '../post_detail/PostDetailViewController.jsx';
+import HeaderViewController from '../header/HeaderViewController.jsx';
 
 
 const samplePost = {
@@ -20,10 +17,9 @@ const samplePost = {
 const MainPage = () => {
     return (
         <div className='mainPage'>
-            <Header />
+            <HeaderViewController />
             <SafeArea>
-                <PostDetailView post={samplePost}/>
-                {/* <NewPost /> */}
+                <PostdetailViewController />
                 <Footer />
             </SafeArea>
         </div>

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     Typography, Breadcrumbs, Link, Button,
     IconButton, Hidden, Paper, MenuItem,
-    ClickAwayListener, Grow, Popper, MenuList,
+    ClickAwayListener, Popper, MenuList,
     Divider
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
@@ -12,23 +12,27 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import StarIcon from '@material-ui/icons/StarBorder';
 
-import CommentSection from './comment/CommentSection.jsx';
-
+import CommentSectionViewController from '../comment/CommentSectionViewController.jsx';
 
 const PostDetailView = (props) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <TopUtilRow />
+            <TopUtilRow
+                paths={props.paths}
+                onNavLinkClicked={props.onNavLinkClicked}
+                onTopUtilRowButtonClicked={props.onTopUtilRowButtonClicked}
+                onMoreDropDownContentClicked={props.onMoreDropDownContentClicked}
+            />
             <div className={classes.content}>
-                <Typography 
+                <Typography
                     variant='h5'
                 >
                     {props.post.title}
                 </Typography>
-                <Typography 
-                    variant='caption' 
+                <Typography
+                    variant='caption'
                     className={classes.date}
                 >
                     Created by {props.post.author} on {props.post.date}
@@ -39,13 +43,13 @@ const PostDetailView = (props) => {
                 >
                     {props.post.body}
                 </Typography>
-                <CommentSection />
+                <CommentSectionViewController />
             </div>
         </div>
     );
 }
 
-const TopUtilRow = () => {
+const TopUtilRow = (props) => {
     const classes = useStyles();
     const anchorRef = React.useRef(null);
     const [moreDropDownOpen, setMoreDropDownOpen] = React.useState(false);
@@ -64,6 +68,7 @@ const TopUtilRow = () => {
         { text: 'Save for later', icon: (<StarIcon className={classes.leftIcon} />) },
         { text: 'Share', icon: (<ShareIcon className={classes.leftIcon} />) }
     ];
+    
 
     const onMoreButtonClicked = (e) => {
         setMoreDropDownOpen(prevOpen => !prevOpen);
@@ -80,18 +85,16 @@ const TopUtilRow = () => {
     return (
         <div className={classes.topUtilRow}>
             <Breadcrumbs maxItems={3} aria-label='breadcrumb' className={classes.breadcrumbs}>
-                <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                    Home
-            </Link>
-                <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                    Catalog
-            </Link>
-                <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                    Accessories
-            </Link>
-                <Link color="primary" href="#" onClick={onNavLinkClicked}>
-                    Data Engineering
-            </Link>
+                {props.paths.map(path => (
+                    <Link 
+                        key={'link' + path}
+                        color="primary"
+                        href="#" 
+                        onClick={() => props.onNavLinkClicked(path)}
+                    >
+                        {path}
+                    </Link>
+                ))}
             </Breadcrumbs>
             <span className={classes.topUtilRowButtons}>
                 <Hidden smDown>
@@ -100,6 +103,7 @@ const TopUtilRow = () => {
                             key={'topUtilRowButtons-' + item.text}
                             disableRipple
                             className={classes.buttons}
+                            onClick={() => props.onTopUtilRowButtonClicked(item.text)}
                         >
                             {item.icon}
                             {item.text}
@@ -121,6 +125,7 @@ const TopUtilRow = () => {
                                     {topUtilRowButtons.map(item => (
                                         <MenuItem
                                             key={'topUitlRowButtons-DropDown-' + item.text}
+                                            onClick={() => props.onTopUtilRowButtonClicked(item.text)}
                                             disableRipple
                                         >
                                             <Typography variant='body2'>
@@ -137,6 +142,7 @@ const TopUtilRow = () => {
                                     return (
                                         <MenuItem
                                             key={'moreDropDownContents-' + item}
+                                            onClick={() => props.onMoreDropDownContentClicked(item)}
                                             disableRipple
                                         >
                                             <Typography variant='body2'>
@@ -152,10 +158,6 @@ const TopUtilRow = () => {
             </span>
         </div>
     );
-}
-
-const onNavLinkClicked = () => {
-    console.log('clicked');
 }
 
 const useStyles = makeStyles(theme => ({
