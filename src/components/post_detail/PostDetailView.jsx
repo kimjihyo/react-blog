@@ -12,6 +12,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import StarIcon from '@material-ui/icons/StarBorder';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import LabelIcon from '@material-ui/icons/Label';
+import EyeIcon from '@material-ui/icons/RemoveRedEye';
 
 import RichTextEditorDisplayer from '../text_editor/RichTextEditorDisplayer.jsx';
 import CommentSectionViewController from '../comment/CommentSectionViewController.jsx';
@@ -89,7 +91,11 @@ const TopUtilRow = (props) => {
 
     return (
         <div className={classes.topUtilRow}>
-            <Breadcrumbs maxItems={3} aria-label='breadcrumb' className={classes.breadcrumbs}>
+            <Breadcrumbs 
+                maxItems={3} 
+                aria-label='breadcrumb' 
+                className={classes.breadcrumbs}
+            >
                 {props.paths.map(path => (
                     <Link
                         key={'link' + path}
@@ -101,6 +107,7 @@ const TopUtilRow = (props) => {
                     </Link>
                 ))}
             </Breadcrumbs>
+            
             <span className={classes.topUtilRowButtons}>
                 <Hidden smDown>
                     {topUtilRowButtons.map(item => (
@@ -169,38 +176,51 @@ const BottomRow = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.bottomRow}>
-            <Button
-                className={classes.buttons}
-                disableRipple
+            <div
+                className={classes.likeButtonInBottomRow}
             >
-                <ThumbUpIcon className={classes.leftIcon}/>
+                <ThumbUpIcon 
+                    className={classes.leftIcon}
+                />
                 <Typography
-                    variant='body2'
+                    variant='caption'
                 >
                     Like
                 </Typography>
-            </Button>
-            <Typography
-                variant='body2'
-                style={{
-                    lineHeight: 3,
-                    color: '#525252',
-                    marginLeft: '1em',
-                }}
+            </div>
+            <div
+                className={classes.likeButtonLabel}
             >
-                116 view(s)
-            </Typography>
-            <Typography
-                variant='body2'
-                style={{
-                    lineHeight: 3,
-                    color: '#525252',
-                    marginLeft: 'auto',
-                    marginRight: '2em',
-                }}
+                <Typography
+                    variant='caption'
+                >
+                    Be the first to like this
+                </Typography>
+            </div>
+            <div
+                className={classes.viewColumnInBottomRow}
             >
-                No labels
-            </Typography>
+                <EyeIcon 
+                    className={classes.leftIcon}
+                />
+                <Typography
+                    variant='caption'
+                >
+                    116 view(s)
+                </Typography>
+            </div>
+            <div
+                className={classes.labelColumnInBottonRow}
+            >
+                <LabelIcon 
+                    className={classes.leftIcon}
+                />
+                <Typography
+                    variant='caption'
+                >
+                    No labels
+                </Typography>
+            </div>
         </div>
     );
 }
@@ -237,7 +257,7 @@ const useStyles = makeStyles(theme => ({
     },
     leftIcon: {
         margin: theme.spacing(0.5),
-        fontSize: 20,
+        fontSize: 15,
     },
     buttons: {
         textTransform: 'none',
@@ -256,6 +276,34 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: '2em',
         paddingRight: '1em',
         // backgroundColor: 'tomato',
+    },
+    viewColumnInBottomRow: {
+        color: '#525252',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '1em',
+    },
+    labelColumnInBottonRow: {
+        display: 'flex',
+        color: '#525252',
+        marginLeft: 'auto',
+        marginRight: '1em',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    likeButtonLabel: {
+        color: '#525252',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '1em',
+    },
+    likeButtonInBottomRow: {
+        color: '#525252',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 }));
 

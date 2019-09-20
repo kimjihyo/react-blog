@@ -47,6 +47,7 @@ const useStyles = makeStyles(theme => ({
         color: '#666666',
         padding: '2em',
         textAlign: 'center',
+        marginTop: '2em',
     },
     someClass: {
         display: 'flex',
