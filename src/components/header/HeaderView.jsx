@@ -39,7 +39,7 @@ const HeaderView = (props) => {
                         </IconButton>
                     </Hidden>
                     <Typography className={classes.title} variant='subtitle1'>
-                        jihyo-kim
+                        {props.title}
                     </Typography>
                     {persistentTapItems.map(item => (
                         <Button

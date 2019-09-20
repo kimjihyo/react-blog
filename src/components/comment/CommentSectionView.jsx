@@ -18,6 +18,8 @@ const CommentSectionView = (props) => {
                     <Comment
                         key={item.id}
                         comment={item}
+                        onLikeClicked={() => props.onLikeClicked(item.id)}
+                        onReplyClicked={() => props.onReplyClicked(item.id)}
                     />
                 ))}
             </div>

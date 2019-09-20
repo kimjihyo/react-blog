@@ -275,7 +275,6 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '1em',
         paddingLeft: '2em',
         paddingRight: '1em',
-        // backgroundColor: 'tomato',
     },
     viewColumnInBottomRow: {
         color: '#525252',

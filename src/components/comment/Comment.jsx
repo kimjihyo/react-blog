@@ -23,12 +23,14 @@ const Comment = (props) => {
                 <Typography
                     className={classes.commentBottomRowItem}
                     variant='caption'
+                    onClick={props.onLikeClicked}
                 >
                     Like
                 </Typography>
                 <Typography
                     className={classes.commentBottomRowItem}
                     variant='caption'
+                    onClick={props.onReplyClicked}
                 >
                     Reply
                 </Typography>

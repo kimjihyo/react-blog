@@ -31,6 +31,14 @@ class CommentSectionViewController extends React.Component {
         return sampleComments;
     }
 
+    onLikeClicked(id) {
+        console.log('like' + id);
+    }
+
+    onReplyClicked(id) {
+        console.log('reply' + id);
+    }
+
     render() {
         return (
             <CommentSectionView 
@@ -40,6 +48,8 @@ class CommentSectionViewController extends React.Component {
                 onCancel={this.onCancel}
                 onSave={this.onSave}
                 onPreviewClicked={this.onPreviewClicked}
+                onLikeClicked={this.onLikeClicked}
+                onReplyClicked={this.onReplyClicked}
             />
         )
     }
@@ -70,6 +80,6 @@ const sampleComments = [
         id: 4,
         author: 'Malboro Gold',
         date: 'March 25, 2015',
-        body: 'Old town road, Malboro Gold, and love',
+        body: 'Canada China South Korea United States',
     },
 ]

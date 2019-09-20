@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography } from '@material-ui/core';
 
-// Drawer Items
-// const drawerItems = ['Archive', 'Lables'];
-
-
-
 const Drawer = (props) => {
     const classes = useStyles();
 

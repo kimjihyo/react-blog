@@ -14,9 +14,14 @@ class HeaderViewController extends React.Component {
         console.log(buttonType);
     }
 
+    getTitle() {
+        return 'jkim';
+    }
+
     render() {
         return (
             <HeaderView 
+                title={this.getTitle()}
                 onTabItemClicked={this.onTabItemClicked}
                 onEnterPressed={this.onEnterPressed}
             />
