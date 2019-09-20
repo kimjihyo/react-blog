@@ -1,13 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Typography } from '@material-ui/core';
-import SubComment from './SubComment.jsx';
 
-const Comment = (props) => {
+const SubComment = (props) => {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className={classes.root}>
             <Divider className={classes.topDivider} />
             <Typography
                 variant='subtitle1'
@@ -24,32 +23,18 @@ const Comment = (props) => {
                 <Typography
                     className={classes.commentBottomRowItem}
                     variant='caption'
-                    onClick={props.onLikeClicked}
-                >
-                    Like
-                </Typography>
-                <Typography
-                    className={classes.commentBottomRowItem}
-                    variant='caption'
-                    onClick={props.onReplyClicked}
-                >
-                    Reply
-                </Typography>
-                <Typography
-                    className={classes.commentBottomRowItem}
-                    variant='caption'
                 >
                     {props.comment.date}
                 </Typography>
             </div>
-            {props.comment.subComments.map(comment => (
-              <SubComment comment={comment}/>  
-            ))}
         </div>
     );
 }
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        marginLeft: '2em',
+    },
     topDivider: {
         margin: '.5em 0em',
     },
@@ -62,11 +47,4 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default Comment;
-
-const sampleSubComment = {
-        id: 4,
-        author: 'Malboro Gold',
-        date: 'March 25, 2015',
-        body: 'Canada China South Korea United States',
-    };
+export default SubComment;

@@ -63,23 +63,53 @@ const sampleComments = [
         author: 'Jihyo Kim',
         date: 'April 30, 2019',
         body: 'hello world this is comment',
+        subComments: [
+            {
+                id: 6,
+                author: 'Unknown User',
+                date: 'March 25, 2020',
+                body: 'I am Jihyo Kim. Nice to meet you.',
+            },
+        ],
     },
     {
         id: 2,
         author: 'Samuel Leena',
         date: 'Janurary 21, 2019',
         body: 'another comment that is logngn Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, q',
+        subComments: [],
     },
     {
         id: 3,
         author: 'Unknown User',
         date: 'March 25, 2015',
         body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, q',
+        subComments: [],
     },
     {
         id: 4,
         author: 'Malboro Gold',
         date: 'March 25, 2015',
         body: 'Canada China South Korea United States',
+        subComments: [
+            {
+                id: 8,
+                author: 'Unknown User',
+                date: 'March 25, 2020',
+                body: 'another comment that is logngn Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, q',
+            },
+            {
+                id: 9,
+                author: 'Unknown User',
+                date: 'March 25, 2020',
+                body: 'I am Jihyo Kim. Nice to meet you.',
+            },
+            {
+                id: 10,
+                author: 'Unknown User',
+                date: 'March 25, 2020',
+                body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, q',
+            },
+        ],
     },
 ]
