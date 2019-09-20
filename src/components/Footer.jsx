@@ -5,7 +5,7 @@ import { Typography, List, ListItem, Link } from '@material-ui/core';
 const Footer = () => {
     const footerItems = [
         {
-            text: 'Report a bug',
+            text: 'Report a problem',
             url: '#',
         },
         {

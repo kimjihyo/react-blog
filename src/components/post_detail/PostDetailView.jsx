@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import StarIcon from '@material-ui/icons/StarBorder';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 import RichTextEditorDisplayer from '../text_editor/RichTextEditorDisplayer.jsx';
 import CommentSectionViewController from '../comment/CommentSectionViewController.jsx';
@@ -23,8 +24,7 @@ const PostDetailView = (props) => {
             <TopUtilRow
                 paths={props.paths}
                 onNavLinkClicked={props.onNavLinkClicked}
-                onTopUtilRowButtonClicked={props.onTopUtilRowButtonClicked}
-                onMoreDropDownContentClicked={props.onMoreDropDownContentClicked}
+                onButtonsClicked={props.onButtonsClicked}
             />
             <div className={classes.content}>
                 <Typography
@@ -45,6 +45,9 @@ const PostDetailView = (props) => {
                         content={props.post.body}
                     />
                 </div>
+            </div>
+            <BottomRow />
+            <div className={classes.commentSectionRow}>
                 <CommentSectionViewController />
             </div>
         </div>
@@ -105,7 +108,7 @@ const TopUtilRow = (props) => {
                             key={'topUtilRowButtons-' + item.text}
                             disableRipple
                             className={classes.buttons}
-                            onClick={() => props.onTopUtilRowButtonClicked(item.text)}
+                            onClick={() => props.onButtonsClicked(item.text)}
                         >
                             {item.icon}
                             {item.text}
@@ -127,7 +130,7 @@ const TopUtilRow = (props) => {
                                     {topUtilRowButtons.map(item => (
                                         <MenuItem
                                             key={'topUitlRowButtons-DropDown-' + item.text}
-                                            onClick={() => props.onTopUtilRowButtonClicked(item.text)}
+                                            onClick={() => props.onButtonsClicked(item.text)}
                                             disableRipple
                                         >
                                             <Typography variant='body2'>
@@ -144,7 +147,7 @@ const TopUtilRow = (props) => {
                                     return (
                                         <MenuItem
                                             key={'moreDropDownContents-' + item}
-                                            onClick={() => props.onMoreDropDownContentClicked(item)}
+                                            onClick={() => props.onButtonsClicked(item)}
                                             disableRipple
                                         >
                                             <Typography variant='body2'>
@@ -158,6 +161,46 @@ const TopUtilRow = (props) => {
                     </Paper>
                 </Popper>
             </span>
+        </div>
+    );
+}
+
+const BottomRow = (props) => {
+    const classes = useStyles();
+    return (
+        <div className={classes.bottomRow}>
+            <Button
+                className={classes.buttons}
+                disableRipple
+            >
+                <ThumbUpIcon className={classes.leftIcon}/>
+                <Typography
+                    variant='body2'
+                >
+                    Like
+                </Typography>
+            </Button>
+            <Typography
+                variant='body2'
+                style={{
+                    lineHeight: 3,
+                    color: '#525252',
+                    marginLeft: '1em',
+                }}
+            >
+                116 view(s)
+            </Typography>
+            <Typography
+                variant='body2'
+                style={{
+                    lineHeight: 3,
+                    color: '#525252',
+                    marginLeft: 'auto',
+                    marginRight: '2em',
+                }}
+            >
+                No labels
+            </Typography>
         </div>
     );
 }
@@ -184,10 +227,6 @@ const useStyles = makeStyles(theme => ({
         lineHeight: '3',
         marginRight: '1em',
     },
-    viewCol: {
-        lineHeight: '3',
-        color: 'grey',
-    },
     topUtilRowButtons: {
         display: 'flex',
         marginLeft: 'auto',
@@ -207,7 +246,17 @@ const useStyles = makeStyles(theme => ({
     },
     moreDropDown: {
         boxShadow: '1px 1px 2px #b8b8b8'
-    }
+    },
+    commentSectionRow: {
+        padding: '0 2em',
+    },
+    bottomRow: {
+        display: 'flex',
+        marginBottom: '1em',
+        paddingLeft: '2em',
+        paddingRight: '1em',
+        // backgroundColor: 'tomato',
+    },
 }));
 
 PostDetailView.prototype = {
