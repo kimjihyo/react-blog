@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import RichTextEditor from '../text_editor/RichTextEditor.jsx';
-import { Typography } from '@material-ui/core';
+import { Typography, Divider } from '@material-ui/core';
 import Comment from './Comment.jsx';
 
 const CommentSectionView = (props) => {
@@ -13,6 +13,7 @@ const CommentSectionView = (props) => {
             >
                 {props.numberOfComments} Comments
             </Typography>
+            <Divider className={classes.divider}/>
             <div className={classes.comments}>
                 {props.comments.map(item => (
                     <Comment
@@ -35,10 +36,13 @@ const CommentSectionView = (props) => {
 }
 
 const useStyles = makeStyles(theme => ({
+    divider: {
+        margin: '.5em 0em',
+    },
     commentSection: {
     },
     comments: {
-        marginBottom: '1em',
+        marginBottom: '2em',
     }
 }));
 

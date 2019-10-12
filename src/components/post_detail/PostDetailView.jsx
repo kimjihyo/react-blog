@@ -20,6 +20,13 @@ import CommentSectionViewController from '../comment/CommentSectionViewControlle
 
 const PostDetailView = (props) => {
     const classes = useStyles();
+    if (!props.post) {
+        return (
+            <div className={classes.root}>
+                Loading...
+            </div>
+        );
+    }
 
     return (
         <div className={classes.root}>
@@ -50,7 +57,9 @@ const PostDetailView = (props) => {
             </div>
             <BottomRow />
             <div className={classes.commentSectionRow}>
-                <CommentSectionViewController />
+                <CommentSectionViewController 
+                    postId={props.post.id}
+                />
             </div>
         </div>
     );

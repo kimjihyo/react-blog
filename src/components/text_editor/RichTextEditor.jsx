@@ -209,7 +209,6 @@ const TextFieldButtons = (props) => {
 
 const useStylesForRichTextEditor = makeStyles(theme => ({
     richTextEditor: {
-        width: '100%',
         outline: '1px solid #e3e3e3',
         padding: '1em 0.5em',
         marginTop: '10px',

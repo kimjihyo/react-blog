@@ -2,24 +2,26 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Typography } from '@material-ui/core';
 import SubComment from './SubComment.jsx';
+import RichTextEditorDisplayer from '../text_editor/RichTextEditorDisplayer.jsx';
 
 const Comment = (props) => {
     const classes = useStyles();
 
     return (
         <div>
-            <Divider className={classes.topDivider} />
             <Typography
                 variant='subtitle1'
                 color='primary'
             >
                 {props.comment.author}
             </Typography>
-            <Typography
-                variant='body2'
+            <div
+                className={classes.commentBody}
             >
-                {props.comment.body}
-            </Typography>
+                <RichTextEditorDisplayer
+                    content={props.comment.body}
+                />
+            </div>
             <div className={classes.commentBottomRow}>
                 <Typography
                     className={classes.commentBottomRowItem}
@@ -42,15 +44,19 @@ const Comment = (props) => {
                     {props.comment.date}
                 </Typography>
             </div>
-            {props.comment.subComments.map(comment => (
-              <SubComment comment={comment}/>  
-            ))}
+            <Divider className={classes.divider} />
+            {/* {props.comment.subComments.map(comment => (
+              <SubComment
+                key={comment.id}
+                comment={comment}
+              />  
+            ))} */}
         </div>
     );
 }
 
 const useStyles = makeStyles(theme => ({
-    topDivider: {
+    divider: {
         margin: '.5em 0em',
     },
     commentBottomRow: {
@@ -59,14 +65,18 @@ const useStyles = makeStyles(theme => ({
     },
     commentBottomRowItem: {
         marginRight: '10px',
+    },
+    commentBody: {
+        lineHeight: 2,
+        fontSize: '14px',
     }
 }));
 
 export default Comment;
 
 const sampleSubComment = {
-        id: 4,
-        author: 'Malboro Gold',
-        date: 'March 25, 2015',
-        body: 'Canada China South Korea United States',
-    };
+    id: 4,
+    author: 'Malboro Gold',
+    date: 'March 25, 2015',
+    body: 'Canada China South Korea United States',
+};

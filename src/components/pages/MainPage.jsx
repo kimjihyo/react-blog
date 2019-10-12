@@ -9,7 +9,9 @@ const MainPage = () => {
         <div className='mainPage'>
             <HeaderViewController />
             <SafeArea>
-                <PostdetailViewController />
+                <PostdetailViewController
+                    postId='7JdRtedCQkD0BWLlStfc'
+                />
                 <Footer />
             </SafeArea>
         </div>

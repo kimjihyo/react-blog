@@ -1,9 +1,27 @@
 import React from 'react';
 import CommentSectionView from './CommentSectionView.jsx';
+import { getCommentsByPostId, addComment } from '../../utils';
 
 class CommentSectionViewController extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            comments: [],
+        }
+
+        getCommentsByPostId(props.postId)
+        .then(comments => {
+            console.log(comments);
+            this.setState({
+                comments: comments,
+            })
+        })
+        .catch(e => {
+
+        });
+        this.getComments = this.getComments.bind(this);
+        this.getNumberOfComments = this.getNumberOfComments.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
 
     onCancel() {
@@ -12,7 +30,25 @@ class CommentSectionViewController extends React.Component {
 
     onSave(value) {
         console.log('Save');
-        console.log(value);
+        if (!this.isEmpty(value)) {
+            addComment({
+                postid: this.props.postId,
+                author: "Jihyo Kim",
+                date: new Date(Date.now()),
+                body: value,
+            });
+        }
+    }
+
+    isEmpty(draftJsObject) {
+        let numOfEmptyBlocks = 0;
+        for (let i = 0; i < draftJsObject.blocks.length; i++) {
+            console.log(draftJsObject.blocks[i].text);
+            if (draftJsObject.blocks[i].text === "") {
+                numOfEmptyBlocks += 1;
+            }
+        }
+        return (numOfEmptyBlocks === draftJsObject.blocks.length);
     }
 
     onPreviewClicked() {
@@ -24,11 +60,11 @@ class CommentSectionViewController extends React.Component {
     }
 
     getNumberOfComments() {
-        return sampleComments.length;
+        return this.state.comments.length;
     }
 
     getComments() {
-        return sampleComments;
+        return this.state.comments;
     }
 
     onLikeClicked(id) {
