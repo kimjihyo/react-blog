@@ -38,7 +38,7 @@ class CommentSectionViewController extends React.Component {
 
     isEmpty(draftJsObject) {
     }
-    
+
     getPlaceHolder() {
         return 'Please write a comment here...';
     }
@@ -69,6 +69,7 @@ class CommentSectionViewController extends React.Component {
                 onSave={this.onSave}
                 onLikeClicked={this.onLikeClicked}
                 onReplyClicked={this.onReplyClicked}
+                willDisplayTextEditor={true}
             />
         )
     }

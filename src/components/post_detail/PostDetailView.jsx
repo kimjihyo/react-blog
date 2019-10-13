@@ -66,11 +66,13 @@ const PostDetailView = (props) => {
                 </div>
             </div>
             <BottomRow />
-            <div className={classes.commentSectionRow}>
-                <CommentSectionViewController 
-                    postId={props.post.id}
-                />
-            </div>
+            {props.willDisplayCommentSection &&
+                <div className={classes.commentSectionRow}>
+                    <CommentSectionViewController
+                        postId={props.post.id}
+                    />
+                </div>
+            }
         </div>
     );
 }
@@ -110,9 +112,9 @@ const TopUtilRow = (props) => {
 
     return (
         <div className={classes.topUtilRow}>
-            <Breadcrumbs 
-                maxItems={3} 
-                aria-label='breadcrumb' 
+            <Breadcrumbs
+                maxItems={3}
+                aria-label='breadcrumb'
                 className={classes.breadcrumbs}
             >
                 {props.paths.map(path => (
@@ -126,7 +128,7 @@ const TopUtilRow = (props) => {
                     </Link>
                 ))}
             </Breadcrumbs>
-            
+
             <span className={classes.topUtilRowButtons}>
                 <Hidden smDown>
                     {topUtilRowButtons.map(item => (
@@ -198,7 +200,7 @@ const BottomRow = (props) => {
             <div
                 className={classes.likeButtonInBottomRow}
             >
-                <ThumbUpIcon 
+                <ThumbUpIcon
                     className={classes.leftIcon}
                 />
                 <Typography
@@ -219,7 +221,7 @@ const BottomRow = (props) => {
             <div
                 className={classes.viewColumnInBottomRow}
             >
-                <EyeIcon 
+                <EyeIcon
                     className={classes.leftIcon}
                 />
                 <Typography
@@ -231,7 +233,7 @@ const BottomRow = (props) => {
             <div
                 className={classes.labelColumnInBottonRow}
             >
-                <LabelIcon 
+                <LabelIcon
                     className={classes.leftIcon}
                 />
                 <Typography

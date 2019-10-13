@@ -125,6 +125,7 @@ class PostDetailViewController extends React.Component {
                 paths={this.getPaths()}
                 onNavLinkClicked={this.onNavLinkClicked}
                 onButtonsClicked={this.onButtonsClicked}
+                willDisplayCommentSection={false}
             />
         );
     }

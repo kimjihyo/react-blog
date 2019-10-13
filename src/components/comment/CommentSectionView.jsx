@@ -13,7 +13,7 @@ const CommentSectionView = (props) => {
             >
                 {props.numberOfComments} Comments
             </Typography>
-            <Divider className={classes.divider}/>
+            <Divider className={classes.divider} />
             <div className={classes.comments}>
                 {props.comments.map(item => (
                     <Comment
@@ -24,14 +24,33 @@ const CommentSectionView = (props) => {
                     />
                 ))}
             </div>
+            <CommentTextEditorSection 
+                placeholder={props.placeholder}
+                onCancel={props.onCancel}
+                onSave={props.onSave}
+                isBlockStyleEnabled={false}
+                willDisplayTextEditor={props.willDisplayTextEditor}
+            />
+        </div>
+    );
+}
+
+const CommentTextEditorSection = (props) => {
+    if (props.willDisplayTextEditor) {
+        return (
             <RichTextEditor
                 placeholder={props.placeholder}
                 onCancel={props.onCancel}
                 onSave={props.onSave}
                 isBlockStyleEnabled={false}
             />
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div>
+            </div>
+        );
+    }
 }
 
 const useStyles = makeStyles(theme => ({
