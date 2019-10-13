@@ -108,9 +108,6 @@ const RichTextEditor = (props) => {
                                 clearContents();
                                 props.onCancel();
                                 break;
-                            case 'Preview':
-                                props.onPreviewClicked();
-                                break;
                             default:
                                 console.log('error on text editor event handler');
                         }
@@ -184,24 +181,24 @@ const InlineStyleController = (props) => {
 const textFieldButtons = [
     'Cancel',
     'Save',
-    'Preview',
-]
+];
 
 const TextFieldButtons = (props) => {
     const classes = useStylesForTextFieldButtons();
     return (
         <div className={classes.buttonRows}>
             {textFieldButtons.map(item => (
-                <Button
-                    key={item}
-                    className={classes.button}
-                    onClick={(e) => props.onClick(item)}
-                    color={item === 'Save' ? 'primary' : 'inherit'}
-                    size='small'
-                    disableRipple
-                >
-                    {item}
-                </Button>
+                <div className={classes.button}>
+                    <Button
+                        key={item}
+                        onClick={(e) => props.onClick(item)}
+                        color={item === 'Save' ? 'primary' : 'inherit'}
+                        size='small'
+                        disableRipple
+                    >
+                        {item}
+                    </Button>
+                </div>
             ))}
         </div>
     )
@@ -249,7 +246,7 @@ const useStylesForTextFieldButtons = makeStyles(theme => ({
         justifyContent: 'flex-end',
     },
     button: {
-        fontSize: '12px',
+        color: '#525252',
     },
 }));
 

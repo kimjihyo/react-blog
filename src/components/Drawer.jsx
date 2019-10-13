@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SearchResultViewController from '../components/search/SearchResultViewController.jsx';
 import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography } from '@material-ui/core';
 
 const Drawer = (props) => {

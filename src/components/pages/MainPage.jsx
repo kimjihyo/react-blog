@@ -1,19 +1,17 @@
 import React from 'react';
-import Footer from '../Footer.jsx';
-import SafeArea from '../SafeArea.jsx';
-import PostdetailViewController from '../post_detail/PostDetailViewController.jsx';
-import HeaderViewController from '../header/HeaderViewController.jsx';
+import Page from './Page.jsx';
+import SearchResultViewController from '../search/SearchResultViewController.jsx';
+import PostDetailViewController from '../post_detail/PostDetailViewController.jsx';
 
 const MainPage = () => {
     return (
         <div className='mainPage'>
-            <HeaderViewController />
-            <SafeArea>
-                <PostdetailViewController
-                    postId='7JdRtedCQkD0BWLlStfc'
+            <Page>
+                {/* <SearchResultViewController /> */}
+                <PostDetailViewController
+                    postId={'7JdRtedCQkD0BWLlStfc'}
                 />
-                <Footer />
-            </SafeArea>
+            </Page>
         </div>
     );
 }

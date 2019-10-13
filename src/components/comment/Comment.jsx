@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Typography } from '@material-ui/core';
-import SubComment from './SubComment.jsx';
 import RichTextEditorDisplayer from '../text_editor/RichTextEditorDisplayer.jsx';
 
 const Comment = (props) => {
@@ -45,12 +44,6 @@ const Comment = (props) => {
                 </Typography>
             </div>
             <Divider className={classes.divider} />
-            {/* {props.comment.subComments.map(comment => (
-              <SubComment
-                key={comment.id}
-                comment={comment}
-              />  
-            ))} */}
         </div>
     );
 }

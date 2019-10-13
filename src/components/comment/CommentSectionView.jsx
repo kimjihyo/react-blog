@@ -28,7 +28,6 @@ const CommentSectionView = (props) => {
                 placeholder={props.placeholder}
                 onCancel={props.onCancel}
                 onSave={props.onSave}
-                onPreviewClicked={props.onPreviewClicked}
                 isBlockStyleEnabled={false}
             />
         </div>

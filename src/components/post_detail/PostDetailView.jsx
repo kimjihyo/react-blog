@@ -5,7 +5,7 @@ import {
     Typography, Breadcrumbs, Link, Button,
     IconButton, Hidden, Paper, MenuItem,
     ClickAwayListener, Popper, MenuList,
-    Divider
+    Divider, CircularProgress
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
 import ShareIcon from '@material-ui/icons/Share';
@@ -20,10 +20,20 @@ import CommentSectionViewController from '../comment/CommentSectionViewControlle
 
 const PostDetailView = (props) => {
     const classes = useStyles();
+    if (props.didFailToLoadPost) {
+        return (
+            <div className={classes.root}>
+                Failed To load post
+            </div>
+        );
+    }
+
     if (!props.post) {
         return (
             <div className={classes.root}>
-                Loading...
+                <div className={classes.progress}>
+                    <CircularProgress />
+                </div>
             </div>
         );
     }
@@ -236,6 +246,12 @@ const BottomRow = (props) => {
 
 const useStyles = makeStyles(theme => ({
     root: {
+    },
+    progress: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '5em',
     },
     date: {
         color: 'grey'

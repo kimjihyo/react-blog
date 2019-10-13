@@ -13,8 +13,8 @@ export const getPostById = (id) => {
                 date: convertSecondsToDate(querySnapshot.data().date.seconds),
             });
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(e => {
+            reject(e);
         });
     });
 }
@@ -37,8 +37,8 @@ export const getCommentsByPostId = (id) => {
             });
             resolve(comments);
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(e => {
+            reject(e);
         });
     });
 }
@@ -65,4 +65,18 @@ export const convertSecondsToDate = (seconds) => {
     var date = new Date(1970, 0, 1);
     date.setSeconds(seconds);
     return monthNames[date.getMonth()] + ', ' + date.getDate() + ', ' + date.getFullYear();
+}
+
+export const getPostings = () => {
+    return new Promise((resolve, reject) => {
+        db.collection('directories')
+        .doc('vMZNKh66nqxUWeo5YaAi')
+        .get()
+        .then((querySnapshot) => {
+            resolve(querySnapshot.data().posts);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    });
 }
