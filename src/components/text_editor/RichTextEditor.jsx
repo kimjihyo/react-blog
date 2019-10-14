@@ -99,6 +99,7 @@ const RichTextEditor = (props) => {
             </div>
             <div className='bottomRow'>
                 <TextFieldButtons
+                    for={props.for}
                     onClick={(buttonType) => {
                         switch (buttonType) {
                             case 'Save':
@@ -187,10 +188,12 @@ const TextFieldButtons = (props) => {
     const classes = useStylesForTextFieldButtons();
     return (
         <div className={classes.buttonRows}>
-            {textFieldButtons.map(item => (
-                <div className={classes.button}>
+            {textFieldButtons.map((item, index) => (
+                <div 
+                    className={classes.button}
+                    key={props.for + ' ' + item + ' ' + index}
+                >
                     <Button
-                        key={item}
                         onClick={(e) => props.onClick(item)}
                         color={item === 'Save' ? 'primary' : 'inherit'}
                         size='small'

@@ -39,6 +39,7 @@ const CommentTextEditorSection = (props) => {
     if (props.willDisplayTextEditor) {
         return (
             <RichTextEditor
+                for={'comment-editor'}
                 placeholder={props.placeholder}
                 onCancel={props.onCancel}
                 onSave={props.onSave}
