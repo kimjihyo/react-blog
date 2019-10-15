@@ -1,6 +1,5 @@
 import React from 'react';
 import Page from './Page.jsx';
-import SearchResultViewController from '../search/SearchResultViewController.jsx';
 import PostDetailViewController from '../post_detail/PostDetailViewController.jsx';
 import PostEditor from '../post_editor';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -29,7 +28,12 @@ const MainPage = (props) => {
                         <Route
                             key='main-route'
                             path="/"
-                            component={PostDetailViewController}
+                            render={props => (
+                                <PostDetailViewController 
+                                    key={props.match.params.postId}
+                                    postId={'7JdRtedCQkD0BWLlStfc'}
+                                />
+                            )}
                         />
                     </Switch>
                 </Page>
