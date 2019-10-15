@@ -1,5 +1,7 @@
 import React from 'react';
 import PostEditorView from './PostEditorView.jsx';
+import { addPost } from '../../utils/index.js';
+import { Redirect } from 'react-router-dom';
 
 class PostEditorViewController extends React.Component {
     constructor(props) {
@@ -11,6 +13,8 @@ class PostEditorViewController extends React.Component {
             body: null,
             directory: null,
             label: null,
+            willRedirectToPostCreated: false,
+            createdPostId: null,
         }
         this.onSave = this.onSave.bind(this);
         this.oncancel = this.onCancel.bind(this);
@@ -41,7 +45,23 @@ class PostEditorViewController extends React.Component {
         console.log('title: ' + this.state.title);
         console.log('label: ' + this.state.label);
         console.log('directory: ' + this.state.directory);
-        console.log(value)
+        let post = {
+            title: this.state.title,
+            label: this.state.label,
+            directory: this.state.directory,
+            body: JSON.stringify(value),
+            date: new Date(Date.now()),
+            isCommentEnabled: this.state.isCommentEnabled,
+            isVisibleToPublic: this.state.isVisibleToPublic,
+            author: 'Jihyo Kim',
+        }
+        addPost(post, (id) => {
+            console.log('hello world!!' + id);
+            this.setState({
+                willRedirectToPostCreated: true,
+                createdPostId: id,
+            })
+        });
     }
 
     onCancel() {
@@ -49,6 +69,11 @@ class PostEditorViewController extends React.Component {
     }
 
     render() {
+        if (this.state.willRedirectToPostCreated) {
+            return (
+                <Redirect to={'/post_detail/' + this.state.createdPostId} />
+            );
+        }
         return (
             <PostEditorView
                 onTitleChanged={this.onTitleChanged}

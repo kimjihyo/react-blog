@@ -56,6 +56,48 @@ export const addComment = (comment) => {
     });
 }
 
+export const addPost = (post, onCompletion) => {
+    console.log("addPost");
+    return new Promise((resolve, reject) => {
+        db.collection('posts')
+        .add({
+            isCommentEnabled: post.isCommentEnabled,
+            isVisibleToPublic: post.isVisibleToPublic,
+            title: post.title,
+            label: post.label,
+            directory: post.directory,
+            body: post.body,
+            author: post.author,
+            date: post.date,
+        })
+        .then(ref => {
+            console.log('A post is added with id, ' + ref.id);
+            db.collection('posts_without_body')
+            .add({
+                directory: post.directory,
+                postTitle: post.title,
+                label: post.label,
+                postId: ref.id,
+            });
+            onCompletion(ref.id);
+        });
+    });
+}
+
+export const getPostsVerbose = () => {
+    return new Promise((resolve, reject) => {
+        db.collection('posts_without_body')
+        .get()
+        .then(snapshot => {
+            let posts = [];
+            snapshot.forEach(post => {
+                posts.push(post.data());
+            });
+            resolve(posts);
+        });
+    });
+}
+
 export const convertSecondsToDate = (seconds) => {
     const monthNames = [
         "January", "February", "March", "April", "May", "June",

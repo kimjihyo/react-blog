@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { Link, List, ListItem, ListItemText, } from '@material-ui/core';
+import { Link as RouteLink } from 'react-router-dom';
 
 
 const SearchResultView = (props) => {
@@ -9,21 +10,20 @@ const SearchResultView = (props) => {
         <div
             className={classes.searchResultView}
         >
-            <List component="nav" aria-label="secondary mailbox folders">
-                {props.postings.map(posting => (
-                    <ListItem
-                        key={posting.postId}
-                        button
-                        disableRipple
-                    >
-                        <Typography
-                            variant='caption'
+            <ul
+                className={classes.nav}
+            >
+                {props.posts.map(post => (
+                    <li key={post.postId}>
+                        <RouteLink
+                            key={post.postId}
+                            to={'/post_detail/' + post.postId}
                         >
-                            {'[' + posting.title + ']' + ' ' + posting.postId}
-                        </Typography>
-                    </ListItem>
+                            {post.postTitle}
+                        </RouteLink>
+                    </li>
                 ))}
-            </List>
+            </ul>
         </div>
     );
 }

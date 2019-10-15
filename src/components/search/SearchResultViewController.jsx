@@ -1,17 +1,18 @@
 import React from 'react';
 import SearchResultView from './SearchResultView.jsx';
-import { getPostings } from '../../utils';
+import { getPostsVerbose } from '../../utils';
 
 class SearchResultViewController extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            postings: [],
+            posts: [],
         }
-        getPostings()
-        .then(postings => {
+        getPostsVerbose()
+        .then(posts => {
+            console.log(posts);
             this.setState({
-                postings: postings,
+                posts: posts,
             })
         });
     }
@@ -19,7 +20,7 @@ class SearchResultViewController extends React.Component {
     render() {
         return (
             <SearchResultView 
-                postings={this.state.postings}
+                posts={this.state.posts}
             />
         );
     }

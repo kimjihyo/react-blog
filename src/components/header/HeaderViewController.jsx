@@ -15,7 +15,7 @@ class HeaderViewController extends React.Component {
     }
 
     getTitle() {
-        return 'jkim';
+        return 'jkim-in-dev';
     }
 
     render() {

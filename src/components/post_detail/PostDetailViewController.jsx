@@ -7,16 +7,17 @@ class PostDetailViewController extends React.Component {
         super(props);
 
         this.state = {
+            postId: this.props.postId,
             didFailToLoadPost: false,
             post: null,
         }
-
-        getPostById(this.props.postId)
+        
+        getPostById(this.state.postId)
             .then(post => {
                 this.setState({
                     post: { 
                         ...post,
-                        id: this.props.postId,
+                        id: this.state.postId,
                         body: JSON.parse(post.body),
                     },
                     didFailToLoadPost: false,
@@ -125,7 +126,7 @@ class PostDetailViewController extends React.Component {
                 paths={this.getPaths()}
                 onNavLinkClicked={this.onNavLinkClicked}
                 onButtonsClicked={this.onButtonsClicked}
-                willDisplayCommentSection={false}
+                willDisplayCommentSection={true}
             />
         );
     }

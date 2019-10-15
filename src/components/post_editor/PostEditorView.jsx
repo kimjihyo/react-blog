@@ -85,13 +85,6 @@ const PostEditorView = (props) => {
                             </Typography>
                         }
                     />
-                    <Button
-                        size='small'
-                        variant='outlined'
-                        disableRipple
-                    >
-                        LOAD A SAMPLE POST
-                    </Button>
                 </FormGroup>
             </div>
             <RichTextEditor

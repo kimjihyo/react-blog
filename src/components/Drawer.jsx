@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SearchResultViewController from '../components/search/SearchResultViewController.jsx';
 import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography } from '@material-ui/core';
-
+import { Link as RouteLink } from 'react-router-dom';
+import { getPostsVerbose } from '../utils/index.js';
 const Drawer = (props) => {
     const classes = useStyles();
+    const [state, setState] = React.useState([]);
 
     return (
         <div className={classes.root}>
@@ -27,6 +29,60 @@ const Drawer = (props) => {
                         ));
                     })}
                 </List>
+                <Typography
+                    className={classes.drawerLabel}
+                >
+                    Demo Page Links
+                </Typography>
+                <ul
+                    className={classes.nav}
+                >
+                    <li>
+                        <RouteLink to='/'>
+                            Post Detail View
+                        </RouteLink>
+                    </li>
+                    <li>
+                        <Link href='#'>
+                            Post List View
+                        </Link>
+                    </li>
+                    <li>
+                        <RouteLink to='/edit_post'>
+                            Post Editor View
+                        </RouteLink>
+                    </li>
+                    <li>
+                        <Link href='#'>
+                            Search Result View
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='#'>
+                            Sign In/Up View
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='#'>
+                            Feedback View
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='#'>
+                            Debug Panel View
+                        </Link>
+                    </li>
+                </ul>
+                <Typography
+                    className={classes.drawerLabel}
+                >
+                    Sample Post Links
+                </Typography>
+                <div
+                    className={classes.nav}
+                >
+                    <SearchResultViewController />
+                </div>
             </MaterialDrawer>
         </div>
     );
@@ -51,6 +107,14 @@ const useStyles = makeStyles(theme => ({
     },
     drawerTitle: {
         marginLeft: '1em',
+    },
+    nav: {
+        marginLeft: '2em',
+    },
+    drawerLabel: {
+        marginLeft: '1em',
+        marginBottom: '.5em',
+        marginTop: '.5em',
     }
 }));
 
