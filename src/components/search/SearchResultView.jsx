@@ -19,7 +19,9 @@ const SearchResultView = (props) => {
                             key={post.postId}
                             to={'/post_detail/' + post.postId}
                         >
-                            {post.postTitle}
+                            <Link>
+                                {post.postTitle}
+                            </Link>
                         </RouteLink>
                     </li>
                 ))}

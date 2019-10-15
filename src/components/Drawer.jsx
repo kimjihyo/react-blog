@@ -39,7 +39,9 @@ const Drawer = (props) => {
                 >
                     <li>
                         <RouteLink to='/'>
-                            Post Detail View
+                            <Link>
+                                Post Detail View
+                            </Link>
                         </RouteLink>
                     </li>
                     <li>
@@ -49,7 +51,9 @@ const Drawer = (props) => {
                     </li>
                     <li>
                         <RouteLink to='/edit_post'>
-                            Post Editor View
+                            <Link>
+                                Post Editor View
+                           </Link>
                         </RouteLink>
                     </li>
                     <li>

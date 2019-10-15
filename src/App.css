@@ -7,6 +7,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 .disableSelection {
     user-select: none; /* supported by Chrome and Opera */
     -webkit-user-select: none; /* Safari */
