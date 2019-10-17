@@ -11,7 +11,20 @@ class PostDetailViewController extends React.Component {
             didFailToLoadPost: false,
             post: null,
         }
-        
+
+        this.onButtonsClicked = this.onButtonsClicked.bind(this);
+        this.getPaths = this.getPaths.bind(this);
+        this.getPost = this.getPost.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.handlePageHistory = this.handlePageHistory.bind(this);
+        this.handlePageInformation = this.handlePageInformation.bind(this);
+        this.handleImportWordDocument = this.handleImportWordDocument.bind(this);
+        this.handleCopy = this.handleCopy.bind(this);
+        this.handleMove = this.handleMove.bind(this);
+    }
+
+    componentDidMount() {
         getPostById(this.state.postId)
             .then(post => {
                 this.setState({
@@ -29,17 +42,6 @@ class PostDetailViewController extends React.Component {
                     didFailToLoadPost: true,
                 });
             });
-
-        this.onButtonsClicked = this.onButtonsClicked.bind(this);
-        this.getPaths = this.getPaths.bind(this);
-        this.getPost = this.getPost.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
-        this.handleSave = this.handleSave.bind(this);
-        this.handlePageHistory = this.handlePageHistory.bind(this);
-        this.handlePageInformation = this.handlePageInformation.bind(this);
-        this.handleImportWordDocument = this.handleImportWordDocument.bind(this);
-        this.handleCopy = this.handleCopy.bind(this);
-        this.handleMove = this.handleMove.bind(this);
     }
 
     onNavLinkClicked(link) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentSectionView from './CommentSectionView.jsx';
-import { getCommentsByPostId, addComment, sampleQuery } from '../../utils';
+import { getCommentsByPostId, addComment, sampleQuery, commentObserver } from '../../utils';
 
 class CommentSectionViewController extends React.Component {
     constructor(props) {
@@ -9,31 +9,38 @@ class CommentSectionViewController extends React.Component {
             commentsLoaded: false,
             comments: [],
         }
-
-        getCommentsByPostId(props.postId)
-        .then(comments => {
-            this.setState({
-                comments: comments,
-                commentsLoaded: true,
-            })
-        })
-        .catch(e => {
-            this.setState({
-                commentsLoaded: false,
-                comments: [],
-            })
-        });
-
         this.getComments = this.getComments.bind(this);
         this.getNumberOfComments = this.getNumberOfComments.bind(this);
         this.onSave = this.onSave.bind(this);
         this.onCancel = this.onCancel.bind(this);
 
     }
+
+    componentDidMount() {
+        commentObserver(this.props.postId, (comments) => {
+            this.setState({
+                comments: comments,
+                commentsLoaded: true,
+            })
+        },
+            () => {
+                this.setState({
+                    commentsLoaded: false,
+                    comments: [],
+                })
+            });
+    }
+
     onCancel() {
     }
 
     onSave(value) {
+        addComment({
+            postid: this.props.postId,
+            author: 'Test User',
+            body: JSON.stringify(value),
+            date: new Date(Date.now()),
+        });
     }
 
     isEmpty(draftJsObject) {
@@ -61,7 +68,7 @@ class CommentSectionViewController extends React.Component {
 
     render() {
         return (
-            <CommentSectionView 
+            <CommentSectionView
                 numberOfComments={this.getNumberOfComments()}
                 comments={this.getComments()}
                 placeholder={this.getPlaceHolder()}

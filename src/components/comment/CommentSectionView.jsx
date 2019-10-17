@@ -24,34 +24,16 @@ const CommentSectionView = (props) => {
                     />
                 ))}
             </div>
-            <CommentTextEditorSection 
-                placeholder={props.placeholder}
-                onCancel={props.onCancel}
-                onSave={props.onSave}
-                isBlockStyleEnabled={false}
-                willDisplayTextEditor={props.willDisplayTextEditor}
-            />
+            {props.willDisplayTextEditor &&
+                <RichTextEditor
+                    placeholder={props.placeholder}
+                    onCancel={props.onCancel}
+                    onSave={props.onSave}
+                    isBlockStyleEnabled={false}
+                />
+            }
         </div>
     );
-}
-
-const CommentTextEditorSection = (props) => {
-    if (props.willDisplayTextEditor) {
-        return (
-            <RichTextEditor
-                for={'comment-editor'}
-                placeholder={props.placeholder}
-                onCancel={props.onCancel}
-                onSave={props.onSave}
-                isBlockStyleEnabled={false}
-            />
-        );
-    } else {
-        return (
-            <div>
-            </div>
-        );
-    }
 }
 
 const useStyles = makeStyles(theme => ({

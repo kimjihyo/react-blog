@@ -43,6 +43,24 @@ export const getCommentsByPostId = (id) => {
     });
 }
 
+export const commentObserver = (postId, callback, onError) => {
+    let query = db.collection('comments').where('postid', '==', postId);
+    query.onSnapshot(snapshot => {
+        let comments = [];
+        snapshot.forEach(comment => {
+            comments.push({
+                ...comment.data(),
+                date: convertSecondsToDate(comment.data().date.seconds),
+                body: JSON.parse(comment.data().body),
+                id: comment.id,
+            });
+        })
+        callback(comments);
+    }, error => {
+        onError(error);
+    });
+}
+
 export const addComment = (comment) => {
     console.log("addComment");
     return new Promise((resolove, reject) => {
@@ -50,7 +68,7 @@ export const addComment = (comment) => {
         .add({
             postid: comment.postid,
             author: comment.author,
-            body: JSON.stringify(comment.body),
+            body: comment.body,
             date: comment.date,
         })
     });
@@ -95,6 +113,19 @@ export const getPostsVerbose = () => {
             });
             resolve(posts);
         });
+    });
+}
+
+export const postObserver = (callback, onError) => {
+    db.collection('posts_without_body')
+    .onSnapshot(snapshot => {
+        let posts = [];
+        snapshot.forEach(post => {
+            posts.push(post.data());
+        });
+        callback(posts);
+    }, error => {
+        onError(error);
     });
 }
 

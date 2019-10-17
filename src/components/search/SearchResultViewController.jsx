@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchResultView from './SearchResultView.jsx';
-import { getPostsVerbose } from '../../utils';
+import { getPostsVerbose, postObserver } from '../../utils';
 
 class SearchResultViewController extends React.Component {
     constructor(props) {
@@ -8,12 +8,15 @@ class SearchResultViewController extends React.Component {
         this.state = {
             posts: [],
         }
-        getPostsVerbose()
-        .then(posts => {
-            console.log(posts);
+    }
+
+    componentDidMount() {
+        postObserver(posts => {
             this.setState({
-                posts: posts,
+                posts:posts,
             })
+        }, error => {
+            console.log(error);
         });
     }
 

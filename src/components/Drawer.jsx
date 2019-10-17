@@ -16,76 +16,80 @@ const Drawer = (props) => {
                 classes={{ paper: classes.drawer }}
                 variant={props.variant}
             >
-                <List>
-                    {props.items.map(item => {
-                        if (item === 'Divider') {
-                            return <Divider key='divider' />
-                        }
-
-                        return ((
-                            <ListItem button key={item + '-drawer'}>
-                                <ListItemText primary={item} />
-                            </ListItem>
-                        ));
-                    })}
-                </List>
-                <Typography
-                    className={classes.drawerLabel}
-                >
-                    Demo Page Links
-                </Typography>
-                <ul
-                    className={classes.nav}
-                >
-                    <li>
-                        <RouteLink to='/'>
-                            <Link>
-                                Post Detail View
-                            </Link>
-                        </RouteLink>
-                    </li>
-                    <li>
-                        <Link href='#'>
-                            Post List View
-                        </Link>
-                    </li>
-                    <li>
-                        <RouteLink to='/edit_post'>
-                            <Link>
-                                Post Editor View
-                           </Link>
-                        </RouteLink>
-                    </li>
-                    <li>
-                        <Link href='#'>
-                            Search Result View
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='#'>
-                            Sign In/Up View
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='#'>
-                            Feedback View
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='#'>
-                            Debug Panel View
-                        </Link>
-                    </li>
-                </ul>
-                <Typography
-                    className={classes.drawerLabel}
-                >
-                    Sample Post Links
-                </Typography>
                 <div
-                    className={classes.nav}
+                    className={classes.drawerContent}
                 >
-                    <SearchResultViewController />
+                    <List>
+                        {props.items.map(item => {
+                            if (item === 'Divider') {
+                                return <Divider key='divider' />
+                            }
+
+                            return ((
+                                <ListItem button key={item + '-drawer'}>
+                                    <ListItemText primary={item} />
+                                </ListItem>
+                            ));
+                        })}
+                    </List>
+                    <Typography
+                        className={classes.drawerLabel}
+                    >
+                        Demo Page Links
+                </Typography>
+                    <ul
+                        className={classes.nav}
+                    >
+                        <li>
+                            <RouteLink to='/'>
+                                <Link>
+                                    Post Detail View
+                            </Link>
+                            </RouteLink>
+                        </li>
+                        <li>
+                            <Link href='#'>
+                                Post List View
+                        </Link>
+                        </li>
+                        <li>
+                            <RouteLink to='/edit_post'>
+                                <Link>
+                                    Post Editor View
+                           </Link>
+                            </RouteLink>
+                        </li>
+                        <li>
+                            <Link href='#'>
+                                Search Result View
+                        </Link>
+                        </li>
+                        <li>
+                            <Link href='#'>
+                                Sign In/Up View
+                        </Link>
+                        </li>
+                        <li>
+                            <Link href='#'>
+                                Feedback View
+                        </Link>
+                        </li>
+                        <li>
+                            <Link href='#'>
+                                Debug Panel View
+                        </Link>
+                        </li>
+                    </ul>
+                    <Typography
+                        className={classes.drawerLabel}
+                    >
+                        Sample Post Links
+                </Typography>
+                    <div
+                        className={classes.nav}
+                    >
+                        <SearchResultViewController />
+                    </div>
                 </div>
             </MaterialDrawer>
         </div>
@@ -104,7 +108,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'whitesmoke',
         [theme.breakpoints.up('md')]: {
             paddingTop: '3em',
-        }
+        },
+    },
+    drawerContent: {
+        paddingRight: '3em',
     },
     links: {
         marginLeft: '2em',
@@ -122,5 +129,5 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const drawerWidth = 240;
+export const drawerWidth = 340;
 export default Drawer;

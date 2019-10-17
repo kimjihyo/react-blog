@@ -104,10 +104,11 @@ const RichTextEditor = (props) => {
                         switch (buttonType) {
                             case 'Save':
                                 props.onSave(convertToRaw(editorState.getCurrentContent()));
+                                clearContents();
                                 break;
                             case 'Cancel':
-                                clearContents();
                                 props.onCancel();
+                                clearContents();
                                 break;
                             default:
                                 console.log('error on text editor event handler');
