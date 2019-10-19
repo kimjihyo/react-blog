@@ -14,14 +14,15 @@ const SearchResultView = (props) => {
                 className={classes.nav}
             >
                 {props.posts.map(post => (
-                    <li key={post.postId}>
+                    <li
+                        key={post.postId}
+                        className={classes.postLink}
+                    >
                         <RouteLink
                             key={post.postId}
                             to={'/post_detail/' + post.postId}
                         >
-                            <Link>
-                                {post.postTitle}
-                            </Link>
+                            {post.postTitle}
                         </RouteLink>
                     </li>
                 ))}
@@ -37,8 +38,10 @@ const useStyles = makeStyles(theme => ({
     postId: {
     },
     title: {
-
-    }
+    },
+    postLink: {
+        marginBottom: '0.5em',
+    },
 }));
 
 export default SearchResultView;
