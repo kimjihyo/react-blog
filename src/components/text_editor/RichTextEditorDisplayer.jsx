@@ -10,9 +10,9 @@ const RichTextEditorDisplayer = (props) => {
 
     return (
         <div className={classes.richTextEditorDisplayer}>
-            <Editor 
-                editorState={editorState} 
-                readOnly={true} 
+            <Editor
+                editorState={editorState}
+                readOnly={true}
             />
         </div>
     );
@@ -20,7 +20,11 @@ const RichTextEditorDisplayer = (props) => {
 
 const useStyles = makeStyles(theme => ({
     richTextEditorDisplayer: {
-
+        marginTop: '1em',
+        marginBottom: '3em',
+        lineHeight: 2,
+        fontSize: '15px',
+        color: '#222e42'
     }
 }));
 

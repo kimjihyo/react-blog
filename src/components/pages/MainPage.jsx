@@ -12,6 +12,16 @@ const MainPage = (props) => {
             <Router>
                 <Page>
                     <Switch>
+                        <Route 
+                            key='post-detail-edit'
+                            path="/post_detail/:postId/edit"
+                            render={props=> (
+                                <PostEditor 
+                                    postId={props.match.params.postId}
+                                    isEditing={true}
+                                />
+                            )}
+                        />
                         <Route
                             key='post-detail'
                             path="/post_detail/:postId"
@@ -25,13 +35,16 @@ const MainPage = (props) => {
                         <Route path="/edit_post">
                             <PostEditor />
                         </Route>
+                        <Route path="/debug_pannel">
+                            debug pannel
+                        </Route>
                         <Route
                             key='main-route'
                             path="/"
                             render={props => (
                                 <PostDetailViewController 
                                     key={props.match.params.postId}
-                                    postId={'7JdRtedCQkD0BWLlStfc'}
+                                    postId={'pzVPY0USpVMOS3uHWKur'}
                                 />
                             )}
                         />

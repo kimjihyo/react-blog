@@ -267,7 +267,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1em',
         marginBottom: '3em',
         lineHeight: 2,
-        fontSize: '14px',
+        fontSize: '15px',
         color: '#222e42'
     },
     topUtilRow: {

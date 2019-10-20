@@ -102,6 +102,25 @@ export const addPost = (post, onCompletion) => {
     });
 }
 
+export const editPost = (postId, post, onCompletion) => {
+    console.log("editPost");
+    db.collection('posts')
+    .doc(postId)
+    .update({
+        isCommentEnabled: post.isCommentEnabled,
+        isVisibleToPublic: post.isVisibleToPublic,
+        title: post.title,
+        label: post.label,
+        directory: post.directory,
+        body: post.body,
+        author: post.author,
+        date: post.date,
+    })
+    .then(() => {
+        onCompletion();
+    });
+}
+
 export const getPostsVerbose = () => {
     return new Promise((resolve, reject) => {
         db.collection('posts_without_body')

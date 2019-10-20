@@ -9,6 +9,15 @@ body {
 
 a {
     text-decoration: none;
+    color: '#4287f5';
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: 'black';
 }
 
 .disableSelection {

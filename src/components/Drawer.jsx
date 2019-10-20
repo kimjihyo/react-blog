@@ -6,7 +6,6 @@ import { Link as RouteLink } from 'react-router-dom';
 import { getPostsVerbose } from '../utils/index.js';
 const Drawer = (props) => {
     const classes = useStyles();
-    const [state, setState] = React.useState([]);
 
     return (
         <div className={classes.root}>
@@ -41,10 +40,8 @@ const Drawer = (props) => {
                         className={classes.nav}
                     >
                         <li>
-                            <RouteLink to='/'>
-                                <Link>
-                                    Post Detail View
-                            </Link>
+                            <RouteLink to='/' className={classes.link}>
+                                Post Detail View
                             </RouteLink>
                         </li>
                         <li>
@@ -53,10 +50,8 @@ const Drawer = (props) => {
                         </Link>
                         </li>
                         <li>
-                            <RouteLink to='/edit_post'>
-                                <Link>
-                                    Post Editor View
-                           </Link>
+                            <RouteLink to='/edit_post' className={classes.link}>
+                                Post Editor View
                             </RouteLink>
                         </li>
                         <li>
@@ -67,7 +62,7 @@ const Drawer = (props) => {
                         <li>
                             <Link href='#'>
                                 Sign In/Up View
-                        </Link>
+                            </Link>
                         </li>
                         <li>
                             <Link href='#'>
@@ -75,16 +70,19 @@ const Drawer = (props) => {
                         </Link>
                         </li>
                         <li>
-                            <Link href='#'>
+                            <RouteLink 
+                                to='/debug_pannel'
+                                className={classes.link}
+                            >
                                 Debug Panel View
-                        </Link>
+                            </RouteLink>
                         </li>
                     </ul>
                     <Typography
                         className={classes.drawerLabel}
                     >
-                        Sample Post Links
-                </Typography>
+                        POSTS
+                    </Typography>
                     <div
                         className={classes.nav}
                     >
@@ -126,6 +124,10 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '1em',
         marginBottom: '.5em',
         marginTop: '.5em',
+        fontWeight: 'bold',
+    },
+    link: {
+        color: '#1565c0',
     }
 }));
 

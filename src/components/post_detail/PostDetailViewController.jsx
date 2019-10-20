@@ -1,6 +1,7 @@
 import React from 'react';
 import PostDetailView from './PostDetailView.jsx';
 import { getPostById, convertSecondsToDate } from '../../utils';
+import { withRouter } from 'react-router-dom';
 
 class PostDetailViewController extends React.Component {
     constructor(props) {
@@ -88,8 +89,7 @@ class PostDetailViewController extends React.Component {
     }
 
     handleEdit() {
-        console.log('Edit clicked');
-        console.log(this.state.post);
+        this.props.history.push(this.props.location.pathname + '/edit');
     }
 
     handleSave() {
@@ -134,4 +134,4 @@ class PostDetailViewController extends React.Component {
     }
 }
 
-export default PostDetailViewController;
+export default withRouter(PostDetailViewController);

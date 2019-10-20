@@ -19,6 +19,7 @@ const SearchResultView = (props) => {
                         className={classes.postLink}
                     >
                         <RouteLink
+                            className={classes.link}
                             key={post.postId}
                             to={'/post_detail/' + post.postId}
                         >
@@ -40,8 +41,11 @@ const useStyles = makeStyles(theme => ({
     title: {
     },
     postLink: {
-        marginBottom: '0.5em',
+        // marginBottom: '0.5em',
     },
+    link: {
+        color: '#1565c0',
+    }
 }));
 
 export default SearchResultView;

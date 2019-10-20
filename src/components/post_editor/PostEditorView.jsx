@@ -24,6 +24,7 @@ const PostEditorView = (props) => {
                 InputLabelProps={{
                     shrink: true,
                 }}
+                value={props.title}
                 onChange={props.onTitleChanged}
             />
             <div className={classes.topInputRow}>
@@ -33,6 +34,7 @@ const PostEditorView = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    value={props.label}
                     onChange={props.onLabelChanged}
                 />
                 <TextField
@@ -42,6 +44,7 @@ const PostEditorView = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    value={props.directory}
                     onChange={props.onDirectoryChanged}
                 />
             </div>
@@ -93,6 +96,7 @@ const PostEditorView = (props) => {
                 onCancel={props.onCancel}
                 onSave={props.onSave}
                 isBlockStyleEnabled={true}
+                value={props.body}
             />
         </div>
     );

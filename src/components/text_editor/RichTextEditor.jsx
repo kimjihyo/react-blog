@@ -2,13 +2,15 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Paper, Button } from '@material-ui/core';
 import StyleButton from './StyleButton.jsx';
-import { Editor, EditorState, RichUtils, ContentState, convertToRaw } from 'draft-js';
+import { Editor, EditorState, RichUtils, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
 import './TextEditor.css';
 
 const RichTextEditor = (props) => {
     const editorRef = React.createRef();
     const classes = useStylesForRichTextEditor();
-    const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
+    const [editorState, setEditorState] = props.value ?
+    React.useState(EditorState.createWithContent(convertFromRaw(props.value)))
+    : React.useState(EditorState.createEmpty())
 
     const onChange = (editorState) => setEditorState(editorState);
 
@@ -29,7 +31,6 @@ const RichTextEditor = (props) => {
         const newEditorState = EditorState.push(editorState, ContentState.createFromText(''));
         setEditorState(newEditorState);
     }
-
     const toggleBlockType = (blockType) => {
         onChange(
             RichUtils.toggleBlockType(
@@ -190,7 +191,7 @@ const TextFieldButtons = (props) => {
     return (
         <div className={classes.buttonRows}>
             {textFieldButtons.map((item, index) => (
-                <div 
+                <div
                     className={classes.button}
                     key={props.for + ' ' + item + ' ' + index}
                 >
@@ -218,11 +219,12 @@ const useStylesForRichTextEditor = makeStyles(theme => ({
         marginTop: '0.5em',
     },
     editorTextField: {
-        fontSize: '14px',
         padding: '10px',
-        color: '#525252',
         cursor: 'text',
         minHeight: '5em',
+        lineHeight: 2,
+        fontSize: '15px',
+        color: '#222e42'
     },
     bottomRow: {
         display: 'inline-block',
