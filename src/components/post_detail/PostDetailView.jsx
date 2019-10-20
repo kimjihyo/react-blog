@@ -48,6 +48,7 @@ const PostDetailView = (props) => {
             <div className={classes.content}>
                 <Typography
                     variant='h5'
+                    className={classes.title}
                 >
                     {props.post.title}
                 </Typography>
@@ -249,6 +250,10 @@ const BottomRow = (props) => {
 const useStyles = makeStyles(theme => ({
     root: {
     },
+    title: {
+        fontWeight: 'bold',
+        color: '#222e42',
+    },
     progress: {
         display: 'flex',
         justifyContent: 'center',
@@ -263,6 +268,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '3em',
         lineHeight: 2,
         fontSize: '14px',
+        color: '#222e42'
     },
     topUtilRow: {
         marginBottom: '0.5em',

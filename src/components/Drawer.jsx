@@ -35,7 +35,7 @@ const Drawer = (props) => {
                     <Typography
                         className={classes.drawerLabel}
                     >
-                        Demo Page Links
+                        PAGE TREE
                 </Typography>
                     <ul
                         className={classes.nav}

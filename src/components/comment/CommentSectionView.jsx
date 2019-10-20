@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import RichTextEditor from '../text_editor/RichTextEditor.jsx';
 import { Typography, Divider } from '@material-ui/core';
 import Comment from './Comment.jsx';
+import CommentViewController from './CommentViewController.jsx';
 
 const CommentSectionView = (props) => {
     const classes = useStyles();
@@ -16,11 +17,13 @@ const CommentSectionView = (props) => {
             <Divider className={classes.divider} />
             <div className={classes.comments}>
                 {props.comments.map(item => (
-                    <Comment
+                    <CommentViewController
                         key={item.id}
                         comment={item}
-                        onLikeClicked={() => props.onLikeClicked(item.id)}
-                        onReplyClicked={() => props.onReplyClicked(item.id)}
+                        onLikeClicked={props.onLikeClicked}
+                        onReplyClicked={props.onReplyClicked}
+                        willDisplaySubComments={true}
+                        closeOtherOpenTextEditors={props.closeOtherOpenTextEditors}
                     />
                 ))}
             </div>

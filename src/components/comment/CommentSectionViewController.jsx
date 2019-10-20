@@ -8,6 +8,7 @@ class CommentSectionViewController extends React.Component {
         this.state = {
             commentsLoaded: false,
             comments: [],
+            replyingTo: '',
         }
         this.getComments = this.getComments.bind(this);
         this.getNumberOfComments = this.getNumberOfComments.bind(this);
@@ -58,12 +59,8 @@ class CommentSectionViewController extends React.Component {
         return this.state.comments;
     }
 
-    onLikeClicked(id) {
-        console.log('like' + id);
-    }
-
-    onReplyClicked(id) {
-        console.log('reply' + id);
+    closeOtherOpenTextEditors(id) {
+        console.log(id);
     }
 
     render() {
@@ -74,9 +71,8 @@ class CommentSectionViewController extends React.Component {
                 placeholder={this.getPlaceHolder()}
                 onCancel={this.onCancel}
                 onSave={this.onSave}
-                onLikeClicked={this.onLikeClicked}
-                onReplyClicked={this.onReplyClicked}
                 willDisplayTextEditor={true}
+                closeOtherOpenTextEditors={this.closeOtherOpenTextEditors}
             />
         )
     }

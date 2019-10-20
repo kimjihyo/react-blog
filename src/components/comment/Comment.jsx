@@ -7,7 +7,9 @@ const Comment = (props) => {
     const classes = useStyles();
 
     return (
-        <div>
+        <div
+            className={props.isSubComment ? classes.subComment : classes.comment}
+        >
             <Typography
                 variant='subtitle1'
                 color='primary'
@@ -29,15 +31,26 @@ const Comment = (props) => {
                 >
                     Like
                 </Typography>
+                {!props.isSubComment &&
+                    <Typography
+                        className={classes.commentBottomRowItem}
+                        variant='caption'
+                        onClick={props.onReplyClicked}
+                    >
+                        Reply
+                    </Typography>
+                }
+                {!props.isSubComment &&
+                    <Typography
+                        className={classes.commentBottomRowItem}
+                        variant='caption'
+                        onClick={props.onHideSubCommentsClicked}
+                    >
+                        Toggle
+                    </Typography>
+                }
                 <Typography
-                    className={classes.commentBottomRowItem}
-                    variant='caption'
-                    onClick={props.onReplyClicked}
-                >
-                    Reply
-                </Typography>
-                <Typography
-                    className={classes.commentBottomRowItem}
+                    className={classes.date}
                     variant='caption'
                 >
                     {props.comment.date}
@@ -49,6 +62,9 @@ const Comment = (props) => {
 }
 
 const useStyles = makeStyles(theme => ({
+    subComment: {
+        marginLeft: '1em',
+    },
     divider: {
         margin: '.5em 0em',
     },
@@ -57,6 +73,13 @@ const useStyles = makeStyles(theme => ({
         marginTop: '8px',
     },
     commentBottomRowItem: {
+        marginRight: '10px',
+        '&:hover': {
+            cursor: 'pointer',
+            textDecoration: 'underline',
+         },
+    },
+    date: {
         marginRight: '10px',
     },
     commentBody: {
