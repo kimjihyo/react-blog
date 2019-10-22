@@ -33,45 +33,46 @@ const Drawer = (props) => {
                     </List>
                     <Typography
                         className={classes.drawerLabel}
+                        variant='caption'
                     >
                         PAGE TREE
                 </Typography>
                     <ul
                         className={classes.nav}
                     >
-                        <li>
+                        <li className={classes.linkItem}>
                             <RouteLink to='/' className={classes.link}>
                                 Post Detail View
                             </RouteLink>
                         </li>
-                        <li>
-                            <Link href='#'>
+                        <li className={classes.linkItem}>
+                            <Link href='#' className={classes.link}>
                                 Post List View
                         </Link>
                         </li>
-                        <li>
+                        <li className={classes.linkItem}>
                             <RouteLink to='/edit_post' className={classes.link}>
                                 Post Editor View
                             </RouteLink>
                         </li>
-                        <li>
-                            <Link href='#'>
+                        <li className={classes.linkItem}>
+                            <Link href='#' className={classes.link}>
                                 Search Result View
                         </Link>
                         </li>
-                        <li>
-                            <Link href='#'>
+                        <li className={classes.linkItem}>
+                            <Link href='#' className={classes.link}>
                                 Sign In/Up View
                             </Link>
                         </li>
-                        <li>
-                            <Link href='#'>
+                        <li className={classes.linkItem}>
+                            <Link href='#' className={classes.link}>
                                 Feedback View
-                        </Link>
+                            </Link>
                         </li>
-                        <li>
+                        <li className={classes.linkItem}>
                             <RouteLink 
-                                to='/debug_pannel'
+                                to='/debug_page'
                                 className={classes.link}
                             >
                                 Debug Panel View
@@ -80,6 +81,7 @@ const Drawer = (props) => {
                     </ul>
                     <Typography
                         className={classes.drawerLabel}
+                        variant='caption'
                     >
                         POSTS
                     </Typography>
@@ -122,12 +124,16 @@ const useStyles = makeStyles(theme => ({
     },
     drawerLabel: {
         marginLeft: '1em',
-        marginBottom: '.5em',
         marginTop: '.5em',
         fontWeight: 'bold',
+        color: 'grey'
     },
     link: {
         color: '#1565c0',
+        fontSize: '15px',
+    },
+    linkItem: {
+        marginBottom: '8px',
     }
 }));
 

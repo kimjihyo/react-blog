@@ -61,7 +61,18 @@ const HeaderView = (props) => {
                                 disableRipple 
                                 color='inherit' 
                                 size='small'
-                                onClick={() => props.onTabItemClicked(item)}
+                                onClick={() => {
+                                    switch (item) {
+                                        case 'Create':
+                                            console.log('Create');
+                                            break;
+                                        case 'Sign In':
+                                            console.log('Spaces');
+                                            break;
+                                        default:
+                                            console.log('default');
+                                    }
+                                }}
                                 className={classes.headerButton}
                             >
                                 {item}

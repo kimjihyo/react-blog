@@ -2,6 +2,7 @@ import React from 'react';
 import Page from './Page.jsx';
 import PostDetailViewController from '../post_detail/PostDetailViewController.jsx';
 import PostEditor from '../post_editor';
+import DebugPageView from '../debug_page';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -35,8 +36,8 @@ const MainPage = (props) => {
                         <Route path="/edit_post">
                             <PostEditor />
                         </Route>
-                        <Route path="/debug_pannel">
-                            debug pannel
+                        <Route path="/debug_page">
+                            <DebugPageView />
                         </Route>
                         <Route
                             key='main-route'

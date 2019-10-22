@@ -19,9 +19,11 @@ const SearchResultView = (props) => {
                         className={classes.postLink}
                     >
                         <RouteLink
-                            className={classes.link}
+                            className={post.postId === props.currentlyViewedPostId ?
+                                classes.currentlyViewedLink : classes.link}
                             key={post.postId}
                             to={'/post_detail/' + post.postId}
+                            onClick={() => {props.onLinkClicked(post.postId)}}
                         >
                             {post.postTitle}
                         </RouteLink>
@@ -41,10 +43,15 @@ const useStyles = makeStyles(theme => ({
     title: {
     },
     postLink: {
-        // marginBottom: '0.5em',
+        marginBottom: '8px',
+        fontSize: '15px',
     },
     link: {
         color: '#1565c0',
+    },
+    currentlyViewedLink: {
+        color: '#1565c0',
+        fontWeight: 'bold',
     }
 }));
 
