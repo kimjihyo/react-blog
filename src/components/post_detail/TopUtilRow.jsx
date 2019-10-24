@@ -1,4 +1,15 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+    Typography, Breadcrumbs, Link, Button,
+    IconButton, Hidden, Paper, MenuItem,
+    ClickAwayListener, Popper, MenuList,
+    Divider
+} from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit';
+import ShareIcon from '@material-ui/icons/Share';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import StarIcon from '@material-ui/icons/StarBorder';
 
 const TopUtilRow = (props) => {
     const classes = useStyles();
@@ -115,3 +126,36 @@ const TopUtilRow = (props) => {
         </div>
     );
 }
+
+const useStyles = makeStyles(theme => ({
+    topUtilRow: {
+        marginBottom: '0.5em',
+        display: 'flex',
+        paddingLeft: '2em',
+        paddingRight: '1em',
+    },
+    breadcrumbs: {
+        lineHeight: '3',
+        marginRight: '1em',
+    },
+    topUtilRowButtons: {
+        display: 'flex',
+        marginLeft: 'auto',
+    },
+    leftIcon: {
+        margin: theme.spacing(0.5),
+        fontSize: 15,
+    },
+    buttons: {
+        textTransform: 'none',
+        fontWeight: '400',
+        color: '#525252',
+    },
+    moreDropDown: {
+        boxShadow: '1px 1px 2px #b8b8b8'
+    },
+}));
+
+
+export default TopUtilRow;
+
