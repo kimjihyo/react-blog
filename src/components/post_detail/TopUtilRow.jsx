@@ -1,0 +1,117 @@
+import React from 'react';
+
+const TopUtilRow = (props) => {
+    const classes = useStyles();
+    const anchorRef = React.useRef(null);
+    const [moreDropDownOpen, setMoreDropDownOpen] = React.useState(false);
+
+    const moreDropDownContents = [
+        'Page History',
+        'Page Information',
+        'Import Word Document',
+        'Divider',
+        'Copy',
+        'Move',
+    ];
+
+    const topUtilRowButtons = [
+        { text: 'Edit', icon: (<EditIcon className={classes.leftIcon} />) },
+        { text: 'Save for later', icon: (<StarIcon className={classes.leftIcon} />) },
+        { text: 'Share', icon: (<ShareIcon className={classes.leftIcon} />) }
+    ];
+
+
+    const onMoreButtonClicked = (e) => {
+        setMoreDropDownOpen(prevOpen => !prevOpen);
+    }
+
+    const onMoreDropDownClosed = (e) => {
+        if (anchorRef.current && anchorRef.current.contains(e.target)) {
+            return;
+        }
+
+        setMoreDropDownOpen(false);
+    }
+
+    return (
+        <div className={classes.topUtilRow}>
+            <Breadcrumbs
+                maxItems={3}
+                aria-label='breadcrumb'
+                className={classes.breadcrumbs}
+            >
+                {props.paths.map(path => (
+                    <Link
+                        key={'link' + path}
+                        color="primary"
+                        href="#"
+                        onClick={() => props.onNavLinkClicked(path)}
+                    >
+                        {path}
+                    </Link>
+                ))}
+            </Breadcrumbs>
+
+            <span className={classes.topUtilRowButtons}>
+                <Hidden smDown>
+                    {topUtilRowButtons.map(item => (
+                        <Button
+                            key={'topUtilRowButtons-' + item.text}
+                            disableRipple
+                            className={classes.buttons}
+                            onClick={() => props.onButtonsClicked(item.text)}
+                        >
+                            {item.icon}
+                            {item.text}
+                        </Button>
+                    ))}
+                </Hidden>
+                <IconButton
+                    ref={anchorRef}
+                    onClick={onMoreButtonClicked}
+                    disableRipple
+                    className={classes.buttons}>
+                    <MoreHorizIcon />
+                </IconButton>
+                <Popper open={moreDropDownOpen} anchorEl={anchorRef.current} transition>
+                    <Paper>
+                        <ClickAwayListener onClickAway={onMoreDropDownClosed}>
+                            <MenuList className={classes.moreDropDown}>
+                                <Hidden mdUp>
+                                    {topUtilRowButtons.map(item => (
+                                        <MenuItem
+                                            key={'topUitlRowButtons-DropDown-' + item.text}
+                                            onClick={() => props.onButtonsClicked(item.text)}
+                                            disableRipple
+                                        >
+                                            <Typography variant='body2'>
+                                                {item.text}
+                                            </Typography>
+                                        </MenuItem>
+                                    ))}
+                                    <Divider />
+                                </Hidden>
+                                {moreDropDownContents.map(item => {
+                                    if (item === 'Divider') {
+                                        return <Divider key={'divider-' + moreDropDownContents.indexOf(item)} />
+                                    }
+                                    return (
+                                        <MenuItem
+                                            key={'moreDropDownContents-' + item}
+                                            onClick={() => props.onButtonsClicked(item)}
+                                            disableRipple
+                                        >
+                                            <Typography variant='body2'>
+                                                {item}
+                                            </Typography>
+                                        </MenuItem>
+                                    )
+                                })}
+                            </MenuList>
+                        </ClickAwayListener>
+                    </Paper>
+                </Popper>
+            </span>
+        </div>
+    );
+}
