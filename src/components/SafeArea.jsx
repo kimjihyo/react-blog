@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { drawerWidth } from './Drawer.jsx';
+import { drawerWidth } from './drawer/Drawer.jsx';
 
 const SafeArea = (props) => {
     const classes = useStyles();

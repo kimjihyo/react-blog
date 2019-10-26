@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Hidden, InputBase, Button } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Drawer, { drawerWidth } from '../Drawer.jsx';
+import DrawerContainer, { drawerWidth } from '../drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -104,14 +104,14 @@ const HeaderView = (props) => {
                 </Toolbar>
             </AppBar>
             <Hidden smDown>
-                <Drawer
+                <DrawerContainer
                     isOpen={true}
                     variant='permanent'
                     items={drawerItems}
                 />
             </Hidden>
             <Hidden mdUp>
-                <Drawer
+                <DrawerContainer
                     isOpen={drawerOpen}
                     variant='temporary'
                     onClosed={onDrawerToggled}

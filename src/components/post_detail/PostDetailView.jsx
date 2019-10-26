@@ -38,7 +38,7 @@ const PostDetailView = (props) => {
             />
             <div className={classes.content}>
                 <Typography
-                    variant='h4'
+                    variant='h5'
                     className={classes.title}
                 >
                     {props.post.title}
@@ -57,7 +57,10 @@ const PostDetailView = (props) => {
                     />
                 </div>
             </div>
-            <BottomRow />
+            <BottomRow 
+                label={props.post.label}
+                views={props.post.views}
+            />
             {props.willDisplayCommentSection &&
                 <div className={classes.commentSectionRow}>
                     <CommentSectionViewController
@@ -71,7 +74,8 @@ const PostDetailView = (props) => {
 
 const useStyles = makeStyles(theme => ({
     title: {
-        color: '#222e42',
+        color: '#213454',
+        fontWeight: 'bold',
     },
     progress: {
         display: 'flex',
@@ -87,7 +91,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '3em',
         lineHeight: 2,
         fontSize: '15px',
-        color: '#222e42'
+        color: '#213454'
     },
     content: {
         padding: '0 2em',

@@ -20,8 +20,6 @@ const RichTextEditorDisplayer = (props) => {
 
 const useStyles = makeStyles(theme => ({
     richTextEditorDisplayer: {
-        marginTop: '1em',
-        marginBottom: '3em',
         lineHeight: 2,
         fontSize: '15px',
         color: '#222e42'

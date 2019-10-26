@@ -18,32 +18,26 @@ const PostEditorView = (props) => {
     return (
         <div className={classes.root}>
             <TextField
-                placeholder="Page title"
-                margin="normal"
+                label="Page title"
+                margin="dense"
+                variant="outlined"
                 fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
                 value={props.title}
                 onChange={props.onTitleChanged}
             />
             <div className={classes.topInputRow}>
                 <TextField
-                    placeholder="Label (Optional)"
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                    label="Label (Optional)"
+                    margin="dense"
+                    variant="outlined"
                     value={props.label}
                     onChange={props.onLabelChanged}
                 />
                 <TextField
                     className={classes.pageDirectory}
-                    placeholder="Page directory"
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                    label="Page directory"
+                    variant="outlined"
+                    margin="dense"
                     value={props.directory}
                     onChange={props.onDirectoryChanged}
                 />
@@ -64,7 +58,8 @@ const PostEditorView = (props) => {
                         }
                         label={
                             <Typography
-                                variant='body2'
+                                variant='caption'
+                                className={classes.label}
                             >
                                 Enable Comments
                             </Typography>
@@ -82,7 +77,8 @@ const PostEditorView = (props) => {
                         }
                         label={
                             <Typography
-                                variant='body2'
+                                variant='caption'
+                                className={classes.label}
                             >
                                 Visible to Public
                             </Typography>
@@ -105,6 +101,7 @@ const PostEditorView = (props) => {
 const useStyles = makeStyles(theme => ({
     root: {
         padding: '0em 1em',
+        marginTop: '4em',
     },
     topInputRow: {
         display: 'flex',
@@ -123,6 +120,9 @@ const useStyles = makeStyles(theme => ({
     },
     inputLabel: {
         fontSize: '14px',
+    },
+    label: {
+        color: 'grey',
     }
 }));
 

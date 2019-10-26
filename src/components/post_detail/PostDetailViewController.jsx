@@ -10,6 +10,7 @@ class PostDetailViewController extends React.Component {
         this.state = {
             postId: this.props.postId,
             didFailToLoadPost: false,
+            commentsSectionEnabled: false,
             post: null,
         }
 
@@ -88,6 +89,12 @@ class PostDetailViewController extends React.Component {
         return this.state.post;
     }
 
+    setCommentsSectionEnabled(willEnable) {
+        this.setState({
+            commentsSectionEnabled: willEnable,
+        });
+    }
+
     handleEdit() {
         this.props.history.push(this.props.location.pathname + '/edit');
     }
@@ -128,7 +135,7 @@ class PostDetailViewController extends React.Component {
                 paths={this.getPaths()}
                 onNavLinkClicked={this.onNavLinkClicked}
                 onButtonsClicked={this.onButtonsClicked}
-                willDisplayCommentSection={false}
+                willDisplayCommentSection={this.state.commentsSectionEnabled}
             />
         );
     }

@@ -50,7 +50,7 @@ const BottomRow = (props) => {
                 <Typography
                     variant='caption'
                 >
-                    No labels
+                    {props.label ? props.label : 'No label'}
                 </Typography>
             </div>
         </div>
