@@ -4,10 +4,10 @@ import PostDetailViewController from '../post_detail/PostDetailViewController.js
 import PostEditor from '../post_editor';
 import DebugPageView from '../debug_page';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { getUser, getRepos } from '../../helpers';
 
 
 const MainPage = (props) => {
-    // let { postId } = useParams();
     return (
         <div className='mainPage'>
             <Router>

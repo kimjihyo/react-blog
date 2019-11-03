@@ -1,13 +1,15 @@
 import React from 'react';
 import Drawer from './Drawer.jsx';
 import { postObserver } from '../../utils';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { getRepos } from '../../helpers/GithubHelper';
 
 class DrawerContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             posts: [],
+            repos: [],
             currentlyViewedPostId: '',
         }
 
@@ -17,13 +19,18 @@ class DrawerContainer extends React.Component {
     componentDidMount() {
         postObserver(posts => {
             this.setState({
-                posts:posts,
+                posts: posts,
             })
         }, error => {
             console.log(error);
         });
-        console.log(this.props.location.pathname);
-        console.log(this.props.location.pathname.split('/')[2]);
+
+        getRepos(repos => {
+            this.setState({
+                repos: repos,
+            })
+        });
+
         let paths = this.props.location.pathname.split('/');
 
         if (paths.length >= 3) {
@@ -37,17 +44,17 @@ class DrawerContainer extends React.Component {
         this.setState({
             currentlyViewedPostId: linkClicked,
         })
-        console.log(linkClicked);
     }
 
     render() {
         return (
-            <Drawer 
+            <Drawer
                 isOpen={this.props.isOpen}
                 onClosed={this.props.onClosed}
                 variant={this.props.variant}
                 items={this.props.items}
                 posts={this.state.posts}
+                repos={this.state.repos}
                 currentlyViewedPostId={this.state.currentlyViewedPostId}
                 onPostClicked={this.onPostClicked}
             />

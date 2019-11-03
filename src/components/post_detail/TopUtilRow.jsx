@@ -23,6 +23,7 @@ const TopUtilRow = (props) => {
         'Divider',
         'Copy',
         'Move',
+        'Delete',
     ];
 
     const topUtilRowButtons = [

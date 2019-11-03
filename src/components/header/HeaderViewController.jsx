@@ -1,9 +1,11 @@
 import React from 'react';
 import HeaderView from './HeaderView.jsx';
+import { withRouter } from 'react-router-dom';
 
 class HeaderViewController extends React.Component {
     constructor(props) {
         super(props);
+        this.onTabItemClicked = this.onTabItemClicked.bind(this);
     }
 
     onEnterPressed(value) {
@@ -11,7 +13,13 @@ class HeaderViewController extends React.Component {
     }
 
     onTabItemClicked(buttonType) {
-        console.log(buttonType);
+        switch(buttonType) {
+            case "Create":
+                this.props.history.push('/edit_post');
+                break;
+            default:
+                console.log("default");
+        }
     }
 
     getTitle() {
@@ -29,4 +37,4 @@ class HeaderViewController extends React.Component {
     }
 }
 
-export default HeaderViewController;
+export default withRouter(HeaderViewController);

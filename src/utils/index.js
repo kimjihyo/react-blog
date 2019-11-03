@@ -1,7 +1,6 @@
 import { db } from '../firebase.js'; 
 
 export const getPostById = (id) => {
-    console.log("getPostById");
     return new Promise((resolve, reject) => {
         db.collection('posts')
         .doc(id)
@@ -20,7 +19,6 @@ export const getPostById = (id) => {
 }
 
 export const getCommentsByPostId = (id) => {
-    console.log("getCommentsByPostId");
     return new Promise((resolve, reject) => {
         db.collection('comments')
         .where('postid', '==', id)

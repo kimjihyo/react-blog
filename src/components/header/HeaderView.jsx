@@ -62,16 +62,7 @@ const HeaderView = (props) => {
                                 color='inherit' 
                                 size='small'
                                 onClick={() => {
-                                    switch (item) {
-                                        case 'Create':
-                                            console.log('Create');
-                                            break;
-                                        case 'Sign In':
-                                            console.log('Spaces');
-                                            break;
-                                        default:
-                                            console.log('default');
-                                    }
+                                    props.onTabItemClicked(item);
                                 }}
                                 className={classes.headerButton}
                             >

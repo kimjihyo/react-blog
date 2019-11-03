@@ -86,16 +86,16 @@ const Drawer = (props) => {
                         className={classes.divider}
                     />
                     <ListWithTopLabel
-                        label='POSTS 2'
-                        items={props.posts.map(post => (
+                        label='GITHUB REPOS (kimjihyo0325)'
+                        items={props.repos.map(repo => (
                             <RouteLink
-                                className={post.postId === props.currentlyViewedPostId ?
+                                className={repo.id === props.currentlyViewedPostId ?
                                     classes.boldedLink : classes.link}
-                                key={post.postId}
-                                to={'/post_detail/' + post.postId}
-                                onClick={() => { props.onPostClicked(post.postId) }}
+                                key={repo.id}
+                                to={'/post_detail/' + repo.id}
+                                onClick={() => { props.onPostClicked(repo.id) }}
                             >
-                                {post.postTitle}
+                                {repo.name + ' ' + repo.id}
                             </RouteLink>
                         ))}
                     />
@@ -135,7 +135,7 @@ const useStyles = makeStyles(theme => ({
     },
     link: {
         color: '#1565c0',
-        fontSize: '13px',
+        fontSize: '14px',
     },
     listItem: {
         marginBottom: '8px',
@@ -143,7 +143,7 @@ const useStyles = makeStyles(theme => ({
     boldedLink: {
         color: '#1565c0',
         fontWeight: 'bold',
-        fontSize: '13px',
+        fontSize: '14px',
     },
     divider: {
         margin: '1em 0',
