@@ -10,7 +10,7 @@ class PostDetailViewController extends React.Component {
         this.state = {
             postId: this.props.postId,
             didFailToLoadPost: false,
-            commentsSectionEnabled: true,
+            commentsSectionEnabled: false,
             post: null,
         }
 
@@ -82,7 +82,7 @@ class PostDetailViewController extends React.Component {
     }
 
     getPaths() {
-        return ['Home', 'Hidden', 'Mock Data'];
+        return ['Dashboard', 'Home', 'Test Posts'];
     }
 
     getPost() {

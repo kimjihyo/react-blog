@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography } from '@material-ui/core';
+import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography, ListItemIcon } from '@material-ui/core';
 import { Link as RouteLink } from 'react-router-dom';
 import ListWithTopLabel from './ListWithTopLabel.jsx';
+import DrawerLabel from './DrawerLabel.jsx';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 
 const demoViews = [
     {
@@ -41,6 +43,34 @@ const Drawer = (props) => {
                 <div
                     className={classes.drawerContent}
                 >
+                    <List dense={true}>
+                        <DrawerLabel>SPACE SHORTCUTS</DrawerLabel>
+                        <ListItem disableRipple={true} button>
+                            <ListItemIcon>
+                                <FolderOpenIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Product requirement'} className={classes.listItemText} />
+                        </ListItem>
+                        <ListItem disableRipple={true} button>
+                            <ListItemIcon>
+                                <FolderOpenIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'How-to articles'} className={classes.listItemText} />
+                        </ListItem>
+                        <ListItem disableRipple={true} button>
+                            <ListItemIcon>
+                                <FolderOpenIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Retrospectives'} className={classes.listItemText} />
+                        </ListItem>
+                        <ListItem disableRipple={true} button>
+                            <ListItemIcon>
+                                <FolderOpenIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Troubleshooting articles'} className={classes.listItemText} />
+                        </ListItem>
+                    </List>
+                    <DrawerLabel>CHILD PAGES</DrawerLabel>
                     <List>
                         {props.items.map(item => {
                             if (item === 'Divider') {
@@ -114,24 +144,19 @@ Drawer.prototype = {
 const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: '#fcfcfc',
         [theme.breakpoints.up('md')]: {
             paddingTop: '3em',
         },
+    },
+    listItemText: {
+        color: '#213454'
     },
     bold: {
         fontWeight: 'bold',
     },
     drawerContent: {
         marginBottom: '5em',
-    },
-    unorderedList: {
-        marginLeft: '2em',
-    },
-    drawerLabel: {
-        color: 'grey',
-        marginBottom: '.5em',
-        marginLeft: '1em',
     },
     link: {
         color: '#1565c0',
