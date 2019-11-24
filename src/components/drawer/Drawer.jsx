@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography, ListItemIcon } from '@material-ui/core';
+import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography, ListItemIcon, Grid } from '@material-ui/core';
 import { Link as RouteLink } from 'react-router-dom';
-import ListWithTopLabel from './ListWithTopLabel.jsx';
 import DrawerLabel from './DrawerLabel.jsx';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
+import TreeView from '../tree_view'
+import { BLUE_GREY, BLUE_GREY_800, BLUE_GREY_900, INDIGO, INDIGO_800 } from '../../utils/colors.js';
 
 const demoViews = [
     {
@@ -29,6 +30,29 @@ const demoViews = [
     },
 ];
 
+const pageShortcuts = [
+    {
+        viewName: 'About Me',
+        to: '/',
+    },
+    {
+        viewName: 'Product Requirements',
+        to: '/',
+    },
+    {
+        viewName: 'How-to articles',
+        to: '/edit_post',
+    },
+    {
+        viewName: 'Retrpspectives',
+        to: '/',
+    },
+    {
+        viewName: 'Troubleshooting articles',
+        to: '/debug_page',
+    },
+]
+
 const Drawer = (props) => {
     const classes = useStyles();
 
@@ -45,90 +69,120 @@ const Drawer = (props) => {
                 >
                     <List dense={true}>
                         <DrawerLabel>SPACE SHORTCUTS</DrawerLabel>
-                        <ListItem disableRipple={true} button>
-                            <ListItemIcon>
-                                <FolderOpenIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={'Product requirement'} className={classes.listItemText} />
-                        </ListItem>
-                        <ListItem disableRipple={true} button>
-                            <ListItemIcon>
-                                <FolderOpenIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={'How-to articles'} className={classes.listItemText} />
-                        </ListItem>
-                        <ListItem disableRipple={true} button>
-                            <ListItemIcon>
-                                <FolderOpenIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={'Retrospectives'} className={classes.listItemText} />
-                        </ListItem>
-                        <ListItem disableRipple={true} button>
-                            <ListItemIcon>
-                                <FolderOpenIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={'Troubleshooting articles'} className={classes.listItemText} />
-                        </ListItem>
+                        {pageShortcuts.map(item => (
+                            <ListItem key={item.viewName} disableRipple={true} button className={classes.spaceShortCutItems}>
+                                <Grid container direction="row" alignItems="center" wrap="nowrap">
+                                    <Grid item>
+                                        <div className={classes.leftIcon}>
+                                            <DescriptionOutlinedIcon fontSize='small' />
+                                        </div>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography variant='body2'>
+                                            {item.viewName}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </ListItem>
+                        ))}
                     </List>
-                    <DrawerLabel>CHILD PAGES</DrawerLabel>
-                    <List>
-                        {props.items.map(item => {
-                            if (item === 'Divider') {
-                                return <Divider key='divider' />
-                            }
-
-                            return ((
-                                <ListItem button key={item + '-drawer'}>
-                                    <ListItemText primary={item} />
-                                </ListItem>
-                            ));
-                        })}
-                    </List>
-                    <ListWithTopLabel
-                        label='PAGE TREE'
-                        items={demoViews.map(view => (
-                            <RouteLink
-                                to={view.to}
-                                className={classes.link}
-                            >
-                                {view.viewName}
-                            </RouteLink>
-                        ))}
-                    />
-                    <Divider
-                        className={classes.divider}
-                    />
-                    <ListWithTopLabel
-                        label='POSTS'
-                        items={props.posts.map(post => (
-                            <RouteLink
-                                className={post.postId === props.currentlyViewedPostId ?
-                                    classes.boldedLink : classes.link}
-                                key={post.postId}
-                                to={'/post_detail/' + post.postId}
-                                onClick={() => { props.onPostClicked(post.postId) }}
-                            >
-                                {post.postTitle}
-                            </RouteLink>
-                        ))}
-                    />
-                    <Divider
-                        className={classes.divider}
-                    />
-                    <ListWithTopLabel
-                        label='GITHUB REPOS (kimjihyo0325)'
-                        items={props.repos.map(repo => (
-                            <RouteLink
-                                className={repo.id === props.currentlyViewedPostId ?
-                                    classes.boldedLink : classes.link}
-                                key={repo.id}
-                                to={'/post_detail/' + repo.id}
-                                onClick={() => { props.onPostClicked(repo.id) }}
-                            >
-                                {repo.name + ' ' + repo.id}
-                            </RouteLink>
-                        ))}
-                    />
+                    <Divider className={classes.divider} />
+                    <DrawerLabel>PAGES</DrawerLabel>
+                    <div className={classes.treeViews}>
+                        <TreeView name={'Home'} isOpenByDefault={true} isFolder={true} subTree={
+                            [
+                                {
+                                    name: 'Test Posts', isFolder: true, subTree: [
+                                        {
+                                            name: 'Aborting a build', isFolder: false
+                                        },
+                                        {
+                                            name: 'Acess Logging', isFolder: false
+                                        },
+                                        {
+                                            name: 'Building a software project', isFolder: false
+                                        },
+                                        {
+                                            name: 'Dristributed development', isFolder: false
+                                        },
+                                        {
+                                            name: 'Sub Folder 2', isFolder: true, subTree: [
+                                                {
+                                                    name: 'How to File a Patch', isFolder: false
+                                                },
+                                                {
+                                                    name: 'Groovy Hook Script', isFolder: false
+                                                },
+                                            ],
+                                        }
+                                    ],
+                                },
+                                {
+                                    name: 'Sub Folder 3', isFolder: true, subTree: [
+                                        {
+                                            name: 'FreeBSD', isFolder: false
+                                        },
+                                        {
+                                            name: 'Drupal Development', isFolder: false
+                                        },
+                                        {
+                                            name: 'Perl Projects', isFolder: false
+                                        },
+                                        {
+                                            name: 'Process Tree Killer', isFolder: false
+                                        },
+                                        {
+                                            name: 'Jihyo Kim Blog', isFolder: false
+                                        },
+                                        {
+                                            name: 'New documents show contacts between Giuliani and Pompeo', isFolder: false
+                                        },
+                                    ],
+                                },
+                                {
+                                    name: 'Test Posts 2', isFolder: true, subTree: [
+                                        {
+                                            name: 'Launching agent from console', isFolder: false
+                                        },
+                                        {
+                                            name: 'Net Beans Plugin', isFolder: false
+                                        },
+                                        {
+                                            name: 'Windows agent fail to start via ssh', isFolder: false
+                                        },
+                                        {
+                                            name: 'Shells', isFolder: false
+                                        },
+                                        {
+                                            name: 'Sub Folder 2', isFolder: true, subTree: [
+                                                {
+                                                    name: 'Running Jenkins with native SSL / HTTPS', isFolder: false
+                                                },
+                                                {
+                                                    name: 'Friends: 5 Best Things Joey Did For Chandler (& 5 Chandler Did For Joey)', isFolder: false
+                                                },
+                                            ],
+                                        }
+                                    ],
+                                },
+                                {
+                                    name: 'FreeBSD', isFolder: false
+                                },
+                                {
+                                    name: 'Drupal Development', isFolder: false
+                                },
+                                {
+                                    name: 'Perl Projects', isFolder: false
+                                },
+                                {
+                                    name: 'Process Tree Killer', isFolder: false
+                                },
+                                {
+                                    name: 'Jihyo Kim Blog', isFolder: false
+                                },
+                            ]
+                        } />
+                    </div>
                 </div>
             </MaterialDrawer>
         </div>
@@ -149,30 +203,24 @@ const useStyles = makeStyles(theme => ({
             paddingTop: '3em',
         },
     },
-    listItemText: {
-        color: '#213454'
-    },
-    bold: {
-        fontWeight: 'bold',
-    },
     drawerContent: {
         marginBottom: '5em',
     },
-    link: {
-        color: '#1565c0',
-        fontSize: '14px',
-    },
-    listItem: {
-        marginBottom: '8px',
-    },
-    boldedLink: {
-        color: '#1565c0',
-        fontWeight: 'bold',
-        fontSize: '14px',
+    drawerLabel: {
+        marginBottom: '1em',
     },
     divider: {
-        margin: '1em 0',
-    }
+        marginBottom: '1em',
+    },
+    spaceShortCutItems: {
+        color: BLUE_GREY,
+    },
+    treeViews: {
+        marginLeft: '1em',
+    },
+    leftIcon: {
+        marginRight: '1em',
+    },
 }));
 
 export const drawerWidth = 340;

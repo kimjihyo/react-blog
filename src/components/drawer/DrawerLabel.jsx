@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
+import { BLUE_GREY_800 } from '../../utils/colors.js';
 
 const DrawerLabel = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography variant='body2' className={classes.drawerLabel}>
+            <Typography variant='caption' className={classes.drawerLabel}>
                 {props.children}
             </Typography>
         </div>
@@ -15,10 +16,11 @@ const DrawerLabel = (props) => {
 const useStyles = makeStyles(theme => ({
     root: {
         marginLeft: '1em',
+        marginBottom: '.5em',
     },
     drawerLabel: {
         fontWeight: 'bold',
-        color: '#7c8591',
+        color: BLUE_GREY_800,
     }
 }));
 

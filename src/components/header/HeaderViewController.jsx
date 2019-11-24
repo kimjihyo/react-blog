@@ -15,7 +15,7 @@ class HeaderViewController extends React.Component {
     onTabItemClicked(buttonType) {
         switch(buttonType) {
             case "Create":
-                this.props.history.push('/edit_post');
+                this.props.history.push('/new_post');
                 break;
             default:
                 console.log("default");
@@ -23,7 +23,7 @@ class HeaderViewController extends React.Component {
     }
 
     getTitle() {
-        return 'jkim-in-dev';
+        return 'large-double-double';
     }
 
     render() {

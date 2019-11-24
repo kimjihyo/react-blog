@@ -33,7 +33,7 @@ const MainPage = (props) => {
                                 />
                             )}
                         />
-                        <Route path="/edit_post">
+                        <Route path="/new_post">
                             <PostEditor />
                         </Route>
                         <Route path="/debug_page">
