@@ -5,7 +5,7 @@ import { Link as RouteLink } from 'react-router-dom';
 import DrawerLabel from './DrawerLabel.jsx';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import TreeView from '../tree_view'
-import { BLUE_GREY, BLUE_GREY_800, BLUE_GREY_900, INDIGO, INDIGO_800 } from '../../utils/colors.js';
+import { BLUE_GREY, BLUE_GREY_800, BLUE_GREY_900, INDIGO, INDIGO_800, BLUE_800 } from '../../utils/colors.js';
 
 const demoViews = [
     {
@@ -213,13 +213,14 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '1em',
     },
     spaceShortCutItems: {
-        color: BLUE_GREY,
+        color: BLUE_800,
     },
     treeViews: {
         marginLeft: '1em',
     },
     leftIcon: {
         marginRight: '1em',
+        color: BLUE_GREY
     },
 }));
 
