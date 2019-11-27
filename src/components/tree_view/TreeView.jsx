@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     name: {
         '&:hover': {
             cursor: 'pointer',
+            color: 'black',
             textDecoration: 'underline',
         },
         color: BLUE_800,
