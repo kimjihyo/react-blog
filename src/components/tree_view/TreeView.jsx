@@ -3,6 +3,7 @@ import { Link, makeStyles, Typography, Grid, } from '@material-ui/core';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
+import { BLUE_800 } from '../../utils/colors.js';
 
 const TreeView = (props) => {
     const leftMargin = props.leftMargin ? props.leftMargin : 0;
@@ -12,31 +13,31 @@ const TreeView = (props) => {
     const classes = useStyles();
     return (
         <div style={{ marginLeft: leftMargin + 'em' }}>
-            <div className={classes.name}
-                onClick={() => { setState({ isExpanded: !state.isExpanded }) }}>
-                <div className={classes.preventOverflow}>
-                    <Grid container direction="row" alignItems="center" className={classes.spacing}>
-                        <Grid item>
-                            {state.isExpanded &&
-                                <div className={classes.leftIcon}>
-                                    <FolderOpenOutlinedIcon fontSize='small' />
-                                </div>
-                            }
-                            {!state.isExpanded &&
-                                <div className={classes.leftIcon}>
-                                    <FolderOutlinedIcon fontSize='small' />
-                                </div>
-                            }
-                        </Grid>
-                        <Grid item>
+            <div className={classes.preventOverflow}>
+                <Grid container direction="row" alignItems="center" className={classes.spacing}>
+                    <Grid item>
+                        {state.isExpanded &&
+                            <div className={classes.leftIcon}>
+                                <FolderOpenOutlinedIcon fontSize='small' />
+                            </div>
+                        }
+                        {!state.isExpanded &&
+                            <div className={classes.leftIcon}>
+                                <FolderOutlinedIcon fontSize='small' />
+                            </div>
+                        }
+                    </Grid>
+                    <Grid item>
+                        <div className={classes.name}
+                            onClick={() => { setState({ isExpanded: !state.isExpanded }) }}>
                             <Typography
                                 variant='body2'
                             >
                                 {props.name}
                             </Typography>
-                        </Grid>
+                        </div>
                     </Grid>
-                </div>
+                </Grid>
             </div>
             {state.isExpanded && props.subTree.length > 0 &&
                 props.subTree.map(item => {
@@ -60,11 +61,11 @@ const TreeView = (props) => {
                                         </div>
                                     </Grid>
                                     <Grid item>
-                                        <Link href={'#'}>
+                                        <div className={classes.name}>
                                             <Typography variant='body2'>
                                                 {item.name}
                                             </Typography>
-                                        </Link>
+                                        </div>
                                     </Grid>
                                 </Grid>
                             </div>
@@ -82,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
             cursor: 'pointer',
             textDecoration: 'underline',
         },
-        color: '#607D8B',
+        color: BLUE_800,
     },
     leftIcon: {
         marginRight: '1em',

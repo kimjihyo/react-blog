@@ -3,7 +3,7 @@ import Page from './Page.jsx';
 import PostDetailViewController from '../post_detail/PostDetailViewController.jsx';
 import PostEditor from '../post_editor';
 import DebugPageView from '../debug_page';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { getUser, getRepos } from '../../helpers';
 
 
@@ -43,10 +43,7 @@ const MainPage = (props) => {
                             key='main-route'
                             path="/"
                             render={props => (
-                                <PostDetailViewController 
-                                    key={props.match.params.postId}
-                                    postId={'pzVPY0USpVMOS3uHWKur'}
-                                />
+                                <Redirect to='/post_detail/DmQic5TJStiuMUzxLvOa' />
                             )}
                         />
                     </Switch>
