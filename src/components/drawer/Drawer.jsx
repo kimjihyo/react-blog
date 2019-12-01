@@ -89,7 +89,10 @@ const Drawer = (props) => {
                     <Divider className={classes.divider} />
                     <DrawerLabel>PAGES</DrawerLabel>
                     <div className={classes.treeViews}>
-                        <TreeView name={'Home'} isOpenByDefault={true} isFolder={true} subTree={
+                        {props.directories != null &&
+                            <TreeView directory={props.directories} isOpenByDefault={true} isFolder={true}/>
+                        }
+                        {/* <TreeView name={'Home'} isOpenByDefault={true} isFolder={true} subTree={
                             [
                                 {
                                     name: 'Test Posts', isFolder: true, subTree: [
@@ -181,7 +184,7 @@ const Drawer = (props) => {
                                     name: 'Jihyo Kim Blog', isFolder: false
                                 },
                             ]
-                        } />
+                        } /> */}
                     </div>
                 </div>
             </MaterialDrawer>

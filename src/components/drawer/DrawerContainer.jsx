@@ -3,41 +3,26 @@ import Drawer from './Drawer.jsx';
 import { postObserver } from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { getRepos } from '../../helpers/GithubHelper';
+import { constructDirectoryHierarchy } from '../../handlers/firestoreHandler.js';
 
 class DrawerContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: [],
-            repos: [],
-            currentlyViewedPostId: '',
+            directories: null,
         }
 
         this.onPostClicked = this.onPostClicked.bind(this);
     }
 
     componentDidMount() {
-        postObserver(posts => {
+        constructDirectoryHierarchy()
+        .then(directories => {
+            console.log(directories);
             this.setState({
-                posts: posts,
+                directories: directories,
             })
-        }, error => {
-            console.log(error);
-        });
-
-        getRepos(repos => {
-            this.setState({
-                repos: repos,
-            })
-        });
-
-        let paths = this.props.location.pathname.split('/');
-
-        if (paths.length >= 3) {
-            this.setState({
-                currentlyViewedPostId: paths[2],
-            })
-        }
+        })
     }
 
     onPostClicked(linkClicked) {
@@ -52,11 +37,7 @@ class DrawerContainer extends React.Component {
                 isOpen={this.props.isOpen}
                 onClosed={this.props.onClosed}
                 variant={this.props.variant}
-                items={this.props.items}
-                posts={this.state.posts}
-                repos={this.state.repos}
-                currentlyViewedPostId={this.state.currentlyViewedPostId}
-                onPostClicked={this.onPostClicked}
+                directories={this.state.directories}
             />
         )
     }

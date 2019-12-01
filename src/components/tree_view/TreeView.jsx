@@ -33,44 +33,44 @@ const TreeView = (props) => {
                             <Typography
                                 variant='body2'
                             >
-                                {props.name}
+                                {props.directory.name}
                             </Typography>
                         </div>
                     </Grid>
                 </Grid>
             </div>
-            {state.isExpanded && props.subTree.length > 0 &&
-                props.subTree.map(item => {
-                    if (item.isFolder) {
-                        return <TreeView
-                            key={item.name}
-                            name={item.name}
-                            leftMargin={leftMargin + 0.5}
-                            isFolder={item.isFolder}
-                            subTree={item.subTree}
-                        />
-                    } else {
-                        return <div
-                            key={item.name}
-                            style={{ marginLeft: leftMargin + 0.5 + 'em' }}>
-                            <div className={classes.preventOverflow}>
-                                <Grid container direction="row" alignItems="center" wrap="nowrap" className={classes.spacing}>
-                                    <Grid item>
-                                        <div className={classes.leftIcon}>
-                                            <DescriptionOutlinedIcon fontSize='small' />
-                                        </div>
-                                    </Grid>
-                                    <Grid item>
-                                        <div className={classes.name}>
-                                            <Typography variant='body2'>
-                                                {item.name}
-                                            </Typography>
-                                        </div>
-                                    </Grid>
+            {state.isExpanded && props.directory.childDirectories != null && props.directory.childDirectories.length > 0 &&
+                props.directory.childDirectories.map(item => {
+                    return <TreeView
+                        key={item.name}
+                        directory={item}
+                        leftMargin={leftMargin + 0.5}
+                    />
+                })
+            }
+            {state.isExpanded && props.directory.childPosts != null && props.directory.childPosts.length > 0 &&
+                props.directory.childPosts.map(item => {
+                    console.log(item);
+                    return <div
+                        key={item}
+                        style={{ marginLeft: leftMargin + 0.5 + 'em' }}>
+                        <div className={classes.preventOverflow}>
+                            <Grid container direction="row" alignItems="center" wrap="nowrap" className={classes.spacing}>
+                                <Grid item>
+                                    <div className={classes.leftIcon}>
+                                        <DescriptionOutlinedIcon fontSize='small' />
+                                    </div>
                                 </Grid>
-                            </div>
+                                <Grid item>
+                                    <div className={classes.name}>
+                                        <Typography variant='body2'>
+                                            {item}
+                                        </Typography>
+                                    </div>
+                                </Grid>
+                            </Grid>
                         </div>
-                    }
+                    </div>
                 })
             }
         </div>
