@@ -2,7 +2,7 @@ import React from 'react';
 import PostDetailView from './PostDetailView.jsx';
 import { getPostById, convertSecondsToDate } from '../../utils';
 import { withRouter } from 'react-router-dom';
-import { getDirectoryById, getFullDirectoryPathById, constructDirectoryHierarchy, getRootDirectory } from '../../handlers/firestoreHandler.js';
+import { addDirectory, removeDirectory, addPostInDirectory, moveAllPostsToTestDirectory } from '../../handlers/firestoreHandler.js';
 
 class PostDetailViewController extends React.Component {
     constructor(props) {
@@ -106,6 +106,8 @@ class PostDetailViewController extends React.Component {
 
     handleShare() {
         console.log('Share clicked');
+        console.log(this.state.post.id);
+        moveAllPostsToTestDirectory();
     }
 
     handlePageHistory() {

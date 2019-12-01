@@ -1,2 +1,2 @@
-import DebugPageView from './DebugPageView.jsx';
-export default DebugPageView;
+import DebugPageViewContainer from './DebugPageViewContainer.jsx'
+export default DebugPageViewContainer;

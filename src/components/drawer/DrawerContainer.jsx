@@ -17,11 +17,10 @@ class DrawerContainer extends React.Component {
 
     componentDidMount() {
         constructDirectoryHierarchy()
-        .then(directories => {
-            console.log(directories);
+        .then(hierarchy => {
             this.setState({
-                directories: directories,
-            })
+                directories: hierarchy,
+            });
         })
     }
 

@@ -44,6 +44,7 @@ const MainPage = (props) => {
                             path="/"
                             render={props => (
                                 <Redirect to='/post_detail/DmQic5TJStiuMUzxLvOa' />
+                                // <Redirect to='/debug_page' />
                             )}
                         />
                     </Switch>

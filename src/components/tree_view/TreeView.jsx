@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, makeStyles, Typography, Grid, } from '@material-ui/core';
+import { makeStyles, Typography, Grid, } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
@@ -8,7 +9,7 @@ import { BLUE_800 } from '../../utils/colors.js';
 const TreeView = (props) => {
     const leftMargin = props.leftMargin ? props.leftMargin : 0;
     const [state, setState] = React.useState({
-        isExpanded: props.isOpenByDefault ? props.isOpenByDefault : false,
+        isExpanded: props.directory.isOpenByDefault ? props.directory.isOpenByDefault : false,
     });
     const classes = useStyles();
     return (
@@ -41,6 +42,7 @@ const TreeView = (props) => {
             </div>
             {state.isExpanded && props.directory.childDirectories != null && props.directory.childDirectories.length > 0 &&
                 props.directory.childDirectories.map(item => {
+                    console.log(props.directory.name + `(childCount: ${props.directory.childDirectories.length})` + " -> " + item.name)
                     return <TreeView
                         key={item.name}
                         directory={item}
@@ -50,7 +52,6 @@ const TreeView = (props) => {
             }
             {state.isExpanded && props.directory.childPosts != null && props.directory.childPosts.length > 0 &&
                 props.directory.childPosts.map(item => {
-                    console.log(item);
                     return <div
                         key={item}
                         style={{ marginLeft: leftMargin + 0.5 + 'em' }}>
@@ -62,11 +63,13 @@ const TreeView = (props) => {
                                     </div>
                                 </Grid>
                                 <Grid item>
-                                    <div className={classes.name}>
-                                        <Typography variant='body2'>
-                                            {item}
-                                        </Typography>
-                                    </div>
+                                    <Link to={'/post_detail/' + item}>
+                                        <div className={classes.name}>
+                                            <Typography variant='body2'>
+                                                {item}
+                                            </Typography>
+                                        </div>
+                                    </Link>
                                 </Grid>
                             </Grid>
                         </div>
