@@ -4,7 +4,7 @@ import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hid
 import { Link as RouteLink } from 'react-router-dom';
 import DrawerLabel from './DrawerLabel.jsx';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
-import TreeView from '../tree_view'
+import { FolderTreeViewContainer } from '../tree_view'
 import { BLUE_GREY, BLUE_GREY_800, BLUE_GREY_900, INDIGO, INDIGO_800, BLUE_800 } from '../../utils/colors.js';
 
 const demoViews = [
@@ -89,8 +89,14 @@ const Drawer = (props) => {
                     <Divider className={classes.divider} />
                     <DrawerLabel>PAGES</DrawerLabel>
                     <div className={classes.treeViews}>
-                        {props.directories != null &&
-                            <TreeView directory={props.directories}/>
+                        {props.rootDir != null &&
+                            <FolderTreeViewContainer
+                                directoryId={props.rootDir.id}
+                                name={props.rootDir.name}
+                                isOpenByDefault={props.rootDir.isOpenByDefault}
+                                childDirectories={props.rootDir.childDirectories}
+                                childPosts={props.rootDir.childPosts}
+                            />
                         }
                     </div>
                 </div>

@@ -3,25 +3,26 @@ import Drawer from './Drawer.jsx';
 import { postObserver } from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { getRepos } from '../../helpers/GithubHelper';
-import { constructDirectoryHierarchy } from '../../handlers/firestoreHandler.js';
+import { constructDirectoryHierarchy, getRootDirectory } from '../../handlers/firestoreHandler.js';
 
 class DrawerContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            directories: null,
+            rootDir: null,
         }
 
         this.onPostClicked = this.onPostClicked.bind(this);
     }
 
     componentDidMount() {
-        constructDirectoryHierarchy()
-        .then(hierarchy => {
+        getRootDirectory()
+        .then(rootDir => {
+            console.log(rootDir);
             this.setState({
-                directories: hierarchy,
-            });
-        })
+                rootDir: rootDir,
+            })
+        });
     }
 
     onPostClicked(linkClicked) {
@@ -36,7 +37,7 @@ class DrawerContainer extends React.Component {
                 isOpen={this.props.isOpen}
                 onClosed={this.props.onClosed}
                 variant={this.props.variant}
-                directories={this.state.directories}
+                rootDir={this.state.rootDir}
             />
         )
     }

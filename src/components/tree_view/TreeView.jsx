@@ -5,11 +5,12 @@ import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
 import { BLUE_800 } from '../../utils/colors.js';
+import FolderTreeViewContainer from './FolderTreeViewContainer.jsx';
 
 const TreeView = (props) => {
     const leftMargin = props.leftMargin ? props.leftMargin : 0;
     const [state, setState] = React.useState({
-        isExpanded: props.directory.isOpenByDefault ? props.directory.isOpenByDefault : false,
+        isExpanded: props.isOpenByDefault ? props.isOpenByDefault : false,
     });
     const classes = useStyles();
     return (
@@ -30,28 +31,32 @@ const TreeView = (props) => {
                     </Grid>
                     <Grid item>
                         <div className={classes.name}
-                            onClick={() => { setState({ isExpanded: !state.isExpanded }) }}>
+                            onClick={() => { 
+                                    setState({ isExpanded: !state.isExpanded });
+                                }}>
                             <Typography
                                 variant='body2'
                             >
-                                {props.directory.name}
+                                {props.name}
                             </Typography>
                         </div>
                     </Grid>
                 </Grid>
             </div>
-            {state.isExpanded && props.directory.childDirectories != null && props.directory.childDirectories.length > 0 &&
-                props.directory.childDirectories.map(item => {
-                    console.log(props.directory.name + `(childCount: ${props.directory.childDirectories.length})` + " -> " + item.name)
-                    return <TreeView
+            {state.isExpanded && props.childDirectories != null && props.childDirectories.length > 0 &&
+                props.childDirectories.map(item => {
+                    return <FolderTreeViewContainer
                         key={item.name}
-                        directory={item}
+                        name={item.name}
+                        childDirectories={item.childDirectories}
+                        childPosts={item.childPosts}
+                        isOpenByDefault={item.isOpenByDefault}
                         leftMargin={leftMargin + 0.5}
                     />
                 })
             }
-            {state.isExpanded && props.directory.childPosts != null && props.directory.childPosts.length > 0 &&
-                props.directory.childPosts.map(item => {
+            {state.isExpanded && props.childPosts != null && props.childPosts.length > 0 &&
+                props.childPosts.map(item => {
                     return <div
                         key={item}
                         style={{ marginLeft: leftMargin + 0.5 + 'em' }}>
