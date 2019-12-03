@@ -8,7 +8,7 @@ class FolderTreeViewContainer extends React.Component {
         super(props);
         this.state = {
             childDirectories: [],
-            childPosts: this.props.childPosts,
+            childPosts: [],
         }
     }
 
@@ -19,6 +19,17 @@ class FolderTreeViewContainer extends React.Component {
                     .then(directory => {
                         this.setState({
                             childDirectories: [...this.state.childDirectories, directory],
+                        });
+                    });
+            });
+        }
+
+        if (this.props.childPosts != null) {
+            this.props.childPosts.forEach(postId => {
+                getPostById(postId)
+                    .then(post => {
+                        this.setState({
+                            childPosts: [...this.state.childPosts, post],
                         });
                     });
             });

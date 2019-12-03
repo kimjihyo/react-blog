@@ -70,16 +70,16 @@ const TreeView = (props) => {
                                     </div>
                                 </Grid>
                                 <Grid item>
-                                    <Link to={'/post_detail/' + item}>
-                                        <div className={classes.name} onClick={() => props.onPostClick(item)}>
-                                            {props.postIdToBeBolded != null && props.postIdToBeBolded === item &&
+                                    <Link to={'/post_detail/' + item.id}>
+                                        <div className={classes.name} onClick={() => props.onPostClick(item.id)}>
+                                            {props.postIdToBeBolded != null && props.postIdToBeBolded === item.id &&
                                                 <Typography variant='body2' className={classes.bold}>
-                                                    {item}
+                                                    {item.title}
                                                 </Typography>
                                             }
-                                            {props.postIdToBeBolded == null || props.postIdToBeBolded !== item &&
+                                            {props.postIdToBeBolded == null || props.postIdToBeBolded !== item.id &&
                                                 <Typography variant='body2'>
-                                                    {item}
+                                                    {item.title}
                                                 </Typography>
                                             }
                                         </div>
