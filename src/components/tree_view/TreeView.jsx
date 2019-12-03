@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
-import { BLUE_800 } from '../../utils/colors.js';
+import { BLUE_800, INDIGO_800 } from '../../utils/colors.js';
 import FolderTreeViewContainer from './FolderTreeViewContainer.jsx';
 
 const TreeView = (props) => {
@@ -31,9 +31,9 @@ const TreeView = (props) => {
                     </Grid>
                     <Grid item>
                         <div className={classes.name}
-                            onClick={() => { 
-                                    setState({ isExpanded: !state.isExpanded });
-                                }}>
+                            onClick={() => {
+                                setState({ isExpanded: !state.isExpanded });
+                            }}>
                             <Typography
                                 variant='body2'
                             >
@@ -52,6 +52,8 @@ const TreeView = (props) => {
                         childPosts={item.childPosts}
                         isOpenByDefault={item.isOpenByDefault}
                         leftMargin={leftMargin + 0.5}
+                        postIdToBeBolded={props.postIdToBeBolded}
+                        onPostClick={props.onPostClick}
                     />
                 })
             }
@@ -69,10 +71,17 @@ const TreeView = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <Link to={'/post_detail/' + item}>
-                                        <div className={classes.name}>
-                                            <Typography variant='body2'>
-                                                {item}
-                                            </Typography>
+                                        <div className={classes.name} onClick={() => props.onPostClick(item)}>
+                                            {props.postIdToBeBolded != null && props.postIdToBeBolded === item &&
+                                                <Typography variant='body2' className={classes.bold}>
+                                                    {item}
+                                                </Typography>
+                                            }
+                                            {props.postIdToBeBolded == null || props.postIdToBeBolded !== item &&
+                                                <Typography variant='body2'>
+                                                    {item}
+                                                </Typography>
+                                            }
                                         </div>
                                     </Link>
                                 </Grid>
@@ -106,6 +115,10 @@ const useStyles = makeStyles((theme) => ({
     },
     spacing: {
         marginBottom: '.5em',
+    },
+    bold: {
+        fontWeight: "bold",
+        color: INDIGO_800,
     }
 }));
 

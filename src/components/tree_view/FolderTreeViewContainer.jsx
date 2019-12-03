@@ -32,6 +32,8 @@ class FolderTreeViewContainer extends React.Component {
             childPosts={this.state.childPosts}
             isOpenByDefault={this.props.isOpenByDefault}
             leftMargin={this.props.leftMargin != null ? this.props.leftMargin : 0}
+            postIdToBeBolded={this.props.postIdToBeBolded}
+            onPostClick={this.props.onPostClick}
         />
     }
 }

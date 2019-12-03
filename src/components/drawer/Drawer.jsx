@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Drawer as MaterialDrawer, List, ListItem, ListItemText, makeStyles, Hidden, Divider, Link, Typography, ListItemIcon, Grid } from '@material-ui/core';
-import { Link as RouteLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import DrawerLabel from './DrawerLabel.jsx';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import { FolderTreeViewContainer } from '../tree_view'
@@ -55,7 +55,6 @@ const pageShortcuts = [
 
 const Drawer = (props) => {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <MaterialDrawer
@@ -96,6 +95,8 @@ const Drawer = (props) => {
                                 isOpenByDefault={props.rootDir.isOpenByDefault}
                                 childDirectories={props.rootDir.childDirectories}
                                 childPosts={props.rootDir.childPosts}
+                                postIdToBeBolded={props.currentlyViewedPostId}
+                                onPostClick={props.onPostClick}
                             />
                         }
                     </div>

@@ -1,33 +1,36 @@
 import React from 'react';
 import Drawer from './Drawer.jsx';
-import { postObserver } from '../../utils';
 import { withRouter } from 'react-router-dom';
-import { getRepos } from '../../helpers/GithubHelper';
-import { constructDirectoryHierarchy, getRootDirectory } from '../../handlers/firestoreHandler.js';
+import { getRootDirectory } from '../../handlers/firestoreHandler.js';
 
 class DrawerContainer extends React.Component {
     constructor(props) {
         super(props);
+        let currentlyViewedPostId = ""
+        let currentRouteInArray = this.props.location.pathname.split("/");
+        if (currentRouteInArray.length > 2 && currentRouteInArray[1] === "post_detail") {
+            currentlyViewedPostId = currentRouteInArray[2];
+        }
         this.state = {
             rootDir: null,
+            currentlyViewedPostId: currentlyViewedPostId,
         }
-
-        this.onPostClicked = this.onPostClicked.bind(this);
     }
 
     componentDidMount() {
         getRootDirectory()
         .then(rootDir => {
-            console.log(rootDir);
             this.setState({
                 rootDir: rootDir,
-            })
+            });
         });
+
+        this.onPostClick = this.onPostClick.bind(this);
     }
 
-    onPostClicked(linkClicked) {
+    onPostClick(postId) {
         this.setState({
-            currentlyViewedPostId: linkClicked,
+            currentlyViewedPostId: postId,
         })
     }
 
@@ -38,6 +41,8 @@ class DrawerContainer extends React.Component {
                 onClosed={this.props.onClosed}
                 variant={this.props.variant}
                 rootDir={this.state.rootDir}
+                currentlyViewedPostId={this.state.currentlyViewedPostId}
+                onPostClick={this.onPostClick}
             />
         )
     }
