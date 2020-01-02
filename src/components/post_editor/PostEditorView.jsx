@@ -17,74 +17,16 @@ const PostEditorView = (props) => {
     };
     return (
         <div className={classes.root}>
-            <TextField
-                label="Page title"
-                margin="dense"
-                variant="outlined"
-                fullWidth
-                value={props.title}
-                onChange={props.onTitleChanged}
-            />
             <div className={classes.topInputRow}>
                 <TextField
-                    label="Label (Optional)"
+                    className={classes.pageTitle}
+                    label="Page title"
+                    fullWidth
                     margin="dense"
                     variant="outlined"
-                    value={props.label}
-                    onChange={props.onLabelChanged}
+                    value={props.title}
+                    onChange={props.onTitleChanged}
                 />
-                <TextField
-                    className={classes.pageDirectory}
-                    label="Page directory"
-                    variant="outlined"
-                    margin="dense"
-                    value={props.directory}
-                    onChange={props.onDirectoryChanged}
-                />
-            </div>
-            <div
-                className={classes.postSettingsRow}
-            >
-                <FormGroup row>
-                    <FormControlLabel
-                        className={classes.inputLabel}
-                        control={
-                            <Switch
-                                checked={state.isCommentsEnabled}
-                                onChange={handleChange('isCommentsEnabled')}
-                                value="isCommentsEnabled"
-                                color="primary"
-                            />
-                        }
-                        label={
-                            <Typography
-                                variant='caption'
-                                className={classes.label}
-                            >
-                                Enable Comments
-                            </Typography>
-                        }
-                    />
-                    <FormControlLabel
-                        className={classes.inputLabel}
-                        control={
-                            <Switch
-                                checked={state.isVisibleToPublic}
-                                onChange={handleChange('isVisibleToPublic')}
-                                value="isVisibleToPublic"
-                                color="primary"
-                            />
-                        }
-                        label={
-                            <Typography
-                                variant='caption'
-                                className={classes.label}
-                            >
-                                Visible to Public
-                            </Typography>
-                        }
-                    />
-                </FormGroup>
             </div>
             <RichTextEditor
                 for={'post-editor'}
@@ -105,10 +47,6 @@ const useStyles = makeStyles(theme => ({
     },
     topInputRow: {
         display: 'flex',
-    },
-    pageDirectory: {
-        flex: 2,
-        marginLeft: '1em',
     },
     postSettingsRow: {
         display: 'flex',

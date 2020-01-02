@@ -8,7 +8,10 @@ export const getDirectoryById = (directoryId) => {
             .doc(directoryId)
             .get()
             .then(snapshot => {
-                resolve(snapshot.data());
+                resolve({
+                    ...snapshot.data(),
+                    id: snapshot.id,
+                });
             });
     })
 }

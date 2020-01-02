@@ -18,6 +18,12 @@ class DrawerContainer extends React.Component {
     }
 
     componentDidMount() {
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            console.log(this.contextRef);
+            console.log(event);
+        });
+
         getRootDirectory()
         .then(rootDir => {
             this.setState({

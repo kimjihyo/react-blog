@@ -46,7 +46,7 @@ const TreeView = (props) => {
             {state.isExpanded && props.childDirectories != null && props.childDirectories.length > 0 &&
                 props.childDirectories.map(item => {
                     return <FolderTreeViewContainer
-                        key={item.name}
+                        key={item.id}
                         name={item.name}
                         childDirectories={item.childDirectories}
                         childPosts={item.childPosts}
@@ -60,7 +60,7 @@ const TreeView = (props) => {
             {state.isExpanded && props.childPosts != null && props.childPosts.length > 0 &&
                 props.childPosts.map(item => {
                     return <div
-                        key={item}
+                        key={item.id}
                         style={{ marginLeft: leftMargin + 0.5 + 'em' }}>
                         <div className={classes.preventOverflow}>
                             <Grid container direction="row" alignItems="center" wrap="nowrap" className={classes.spacing}>
