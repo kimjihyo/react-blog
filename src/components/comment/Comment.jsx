@@ -46,7 +46,7 @@ const Comment = (props) => {
                         variant='caption'
                         onClick={props.onHideSubCommentsClicked}
                     >
-                        Toggle
+                        Hide sub-comments
                     </Typography>
                 }
                 <Typography
