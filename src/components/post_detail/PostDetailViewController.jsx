@@ -11,7 +11,7 @@ class PostDetailViewController extends React.Component {
         this.state = {
             postId: this.props.postId,
             didFailToLoadPost: false,
-            commentsSectionEnabled: false,
+            commentsSectionEnabled: true,
             post: null,
         }
 
